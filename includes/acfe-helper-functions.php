@@ -640,14 +640,6 @@ function acfe_array_to_string($array = []) {
  */
 function acfe_is_dev() {
 
-	// deprecated
-	if (defined('ACFE_dev')) {
-
-		acfe_deprecated_constant('ACFE_dev', '0.8.8.7', 'ACFE_DEV');
-		return ACFE_dev;
-
-	}
-
 	return acf_get_setting('acfe/dev', false) || (defined('ACFE_DEV') && ACFE_DEV);
 
 }
@@ -660,14 +652,6 @@ function acfe_is_dev() {
  * @return bool
  */
 function acfe_is_super_dev() {
-
-	// deprecated
-	if (defined('ACFE_super_dev')) {
-
-		acfe_deprecated_constant('ACFE_super_dev', '0.8.8.7', 'ACFE_SUPER_DEV');
-		return ACFE_super_dev;
-
-	}
 
 	return acf_get_setting('acfe/super_dev', false) || (defined('ACFE_SUPER_DEV') && ACFE_SUPER_DEV);
 

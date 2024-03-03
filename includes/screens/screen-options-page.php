@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_screen_options_page')) {
-	return;
-}
-
 class acfe_screen_options_page {
 
 	// vars

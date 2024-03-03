@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_user_roles')) {
-	return;
-}
-
 class acfe_field_user_roles extends acf_field {
 
 	/**

@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_location_post_type_all')) {
-	return;
-}
-
 class acfe_location_post_type_all {
 
 	/**

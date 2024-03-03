@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_instructions')) {
-	return;
-}
-
 class acfe_instructions {
 
 	function __construct() {

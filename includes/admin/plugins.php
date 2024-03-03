@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_admin_plugins')) {
-	return;
-}
-
 class acfe_admin_plugins {
 
 	/**

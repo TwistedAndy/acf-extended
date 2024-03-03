@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content_thumbnail')) {
-	return;
-}
-
 class acfe_field_flexible_content_thumbnail {
 
 	/**
@@ -160,28 +156,6 @@ class acfe_field_flexible_content_thumbnail {
 
 			// Flexible Thumbnails
 			$thumbnail = apply_filters("acfe/flexible/thumbnail", $thumbnail, $field, $layout);
-			$thumbnail = apply_filters("acfe/flexible/thumbnail/name={$name}", $thumbnail, $field, $layout);
-			$thumbnail = apply_filters("acfe/flexible/thumbnail/key={$key}", $thumbnail, $field, $layout);
-			$thumbnail = apply_filters("acfe/flexible/thumbnail/layout={$l_name}", $thumbnail, $field, $layout);
-			$thumbnail = apply_filters("acfe/flexible/thumbnail/name={$name}&layout={$l_name}", $thumbnail, $field, $layout);
-			$thumbnail = apply_filters("acfe/flexible/thumbnail/key={$key}&layout={$l_name}", $thumbnail, $field, $layout);
-
-			// Deprecated
-			$thumbnail = apply_filters_deprecated("acfe/flexible/layout/thumbnail/layout={$l_name}", [
-				$thumbnail,
-				$field,
-				$layout
-			], '0.8.6.7', "acfe/flexible/thumbnail/layout={$l_name}");
-			$thumbnail = apply_filters_deprecated("acfe/flexible/layout/thumbnail/name={$name}&layout={$l_name}", [
-				$thumbnail,
-				$field,
-				$layout
-			], '0.8.6.7', "acfe/flexible/thumbnail/name={$name}&layout={$l_name}");
-			$thumbnail = apply_filters_deprecated("acfe/flexible/layout/thumbnail/key={$key}&layout={$l_name}", [
-				$thumbnail,
-				$field,
-				$layout
-			], '0.8.6.7', "acfe/flexible/thumbnail/key={$key}&layout={$l_name}");
 
 			$layout['acfe_flexible_thumbnail'] = $thumbnail;
 

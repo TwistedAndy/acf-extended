@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_screen_taxonomy')) {
-	return;
-}
-
 class acfe_screen_taxonomy {
 
 	// vars

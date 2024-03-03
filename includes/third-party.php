@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_third_party')) {
-	return;
-}
-
 class acfe_third_party {
 
 	/**

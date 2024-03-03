@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_hooks')) {
-	return;
-}
-
 class acfe_hooks {
 
 	public $field_group;
@@ -554,29 +550,7 @@ class acfe_hooks {
 			return $field;
 		}
 
-		// hooks
-		$field = apply_filters('acfe/load_field', $field);
-
-		// todo: find a solution to add filter variations with deprecated notice
-		// deprecated: admin
-		if (acfe_is_admin()) {
-
-			$field = apply_filters_deprecated("acfe/load_field_admin", [$field], '0.8.8', "acfe/load_field");
-			$field = apply_filters_deprecated("acfe/load_field_admin/type={$field['type']}", [$field], '0.8.8', "acfe/load_field/type={$field['type']}");
-			$field = apply_filters_deprecated("acfe/load_field_admin/name={$field['name']}", [$field], '0.8.8', "acfe/load_field/name={$field['name']}");
-			$field = apply_filters_deprecated("acfe/load_field_admin/key={$field['key']}", [$field], '0.8.8', "acfe/load_field/key={$field['key']}");
-
-			// deprecated: front
-		} else {
-
-			$field = apply_filters_deprecated("acfe/load_field_front", [$field], '0.8.8', "acfe/load_field");
-			$field = apply_filters_deprecated("acfe/load_field_front/type={$field['type']}", [$field], '0.8.8', "acfe/load_field/type={$field['type']}");
-			$field = apply_filters_deprecated("acfe/load_field_front/name={$field['name']}", [$field], '0.8.8', "acfe/load_field/name={$field['name']}");
-			$field = apply_filters_deprecated("acfe/load_field_front/key={$field['key']}", [$field], '0.8.8', "acfe/load_field/key={$field['key']}");
-
-		}
-
-		return $field;
+		return apply_filters('acfe/load_field', $field);
 
 	}
 

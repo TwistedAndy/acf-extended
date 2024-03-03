@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_multilang')) {
-	return;
-}
-
 class acfe_multilang {
 
 	// vars
@@ -475,9 +471,6 @@ class acfe_multilang {
 			$list[] = "tax_{$taxonomy}_options";
 		}
 
-		// deprecated filter
-		$list = apply_filters_deprecated('acfe/modules/multilang/options', [$list], '0.8.8.2', 'acfe/modules/multilang/exclude_options');
-
 		// include filter
 		$list = apply_filters('acfe/modules/multilang/include_options', $list);
 
@@ -901,34 +894,4 @@ function acfe_register_translate($string, $name = '', $textdomain = '') {
 	}
 
 
-}
-
-
-/**
- * acfe__
- *
- * @param $string
- * @param $name
- * @param $textdomain
- *
- * @return mixed|string|null
- * @deprecated
- *
- */
-function acfe__($string, $name = false, $textdomain = 'acfe') {
-	return acfe_translate($string, $name, $textdomain);
-}
-
-
-/**
- * acfe__e
- *
- * @param $string
- * @param $name
- * @param $textdomain
- *
- * @deprecated
- */
-function acfe__e($string, $name = false, $textdomain = 'acfe') {
-	echo acfe_translate($string, $name, $textdomain);
 }

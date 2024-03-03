@@ -9,10 +9,6 @@ if (!acf_get_setting('acfe/modules/options')) {
 	return;
 }
 
-if (class_exists('acfe_module_options')) {
-	return;
-}
-
 class acfe_module_options {
 
 	// vars

@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_enhanced_ui_attachment')) {
-	return;
-}
-
 // check setting
 if (!acf_get_setting('acfe/modules/ui')) {
 	return;

@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('ACFE_Field_Group')) {
-	return;
-}
-
 class ACFE_Field_Group {
 
 	/**

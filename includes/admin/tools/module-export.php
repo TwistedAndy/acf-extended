@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_module_export')) {
-	return;
-}
-
 class acfe_module_export extends ACF_Admin_Tool {
 
 	// vars

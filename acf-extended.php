@@ -113,16 +113,10 @@ if (!class_exists('ACFE')):
 
 				// modules
 				'dev' => false,
-				'modules/author' => true,
 				'modules/categories' => true,
 				'modules/block_types' => true,
-				'modules/forms' => true,
-				'modules/options_pages' => true,
-				'modules/post_types' => true,
-				'modules/taxonomies' => true,
 				'modules/multilang' => true,
 				'modules/options' => true,
-				'modules/performance' => false,
 				'modules/ui' => true,
 
 				// fields
@@ -175,34 +169,6 @@ if (!class_exists('ACFE')):
 			acfe_include('includes/modules/block-type/module-block-type.php');
 			acfe_include('includes/modules/block-type/module-block-type-fields.php');
 			acfe_include('includes/modules/block-type/module-block-type-upgrades.php');
-
-			// form
-			acfe_include('includes/modules/form/module-form-upgrades.php');
-
-			// performance
-			acfe_include('includes/modules/performance/module-performance.php');
-			acfe_include('includes/modules/performance/module-performance-connector.php');
-			acfe_include('includes/modules/performance/module-performance-functions.php');
-			acfe_include('includes/modules/performance/module-performance-ui.php');
-			acfe_include('includes/modules/performance/module-performance-upgrades.php');
-
-			// post type
-			acfe_include('includes/modules/post-type/module-post-type.php');
-			acfe_include('includes/modules/post-type/module-post-type-fields.php');
-			acfe_include('includes/modules/post-type/module-post-type-features.php');
-			acfe_include('includes/modules/post-type/module-post-type-upgrades.php');
-
-			// taxonomy
-			acfe_include('includes/modules/taxonomy/module-taxonomy.php');
-			acfe_include('includes/modules/taxonomy/module-taxonomy-fields.php');
-			acfe_include('includes/modules/taxonomy/module-taxonomy-features.php');
-			acfe_include('includes/modules/taxonomy/module-taxonomy-upgrades.php');
-
-			// options page
-			acfe_include('includes/modules/options-page/module-options-page.php');
-			acfe_include('includes/modules/options-page/module-options-page-fields.php');
-			acfe_include('includes/modules/options-page/module-options-page-features.php');
-			acfe_include('includes/modules/options-page/module-options-page-upgrades.php');
 
 			// screens
 			acfe_include('includes/screens/screen-attachment.php');
@@ -269,9 +235,6 @@ if (!class_exists('ACFE')):
 			acfe_include('includes/locations/taxonomy-list.php');
 
 			// modules
-			acfe_include('includes/modules/author.php');
-			acfe_include('includes/modules/dev/module-dev.php');
-			acfe_include('includes/modules/dev/module-dev-delete-meta.php');
 			acfe_include('includes/modules/option/module-option.php');
 			acfe_include('includes/modules/ui/module-ui.php');
 			acfe_include('includes/modules/ui/module-ui-attachment.php');
@@ -279,14 +242,8 @@ if (!class_exists('ACFE')):
 			acfe_include('includes/modules/ui/module-ui-term.php');
 			acfe_include('includes/modules/ui/module-ui-user.php');
 
-			// performance
-			acfe_include('includes/modules/performance/module-performance-ultra.php');
-			acfe_include('includes/modules/performance/module-performance-ultra-fields.php');
-			acfe_include('includes/modules/performance/module-performance-ultra-revisions.php');
-
 			// modules legacy
 			acfe_include('includes/module-legacy.php');
-			acfe_include('includes/modules/form/module-form.php');
 
 		}
 
@@ -339,12 +296,6 @@ if (!class_exists('ACFE')):
 			// modules
 			acfe_include('includes/admin/tools/module-export.php');
 			acfe_include('includes/admin/tools/module-import.php');
-
-			// modules legacy
-			acfe_include('includes/admin/tools/tools-legacy/module-export-legacy.php');
-			acfe_include('includes/admin/tools/tools-legacy/module-import-legacy.php');
-			acfe_include('includes/admin/tools/tools-legacy/forms-export.php');
-			acfe_include('includes/admin/tools/tools-legacy/forms-import.php');
 
 		}
 

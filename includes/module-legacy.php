@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_dynamic_module')) {
-	return;
-}
-
 class acfe_dynamic_module {
 
 // vars

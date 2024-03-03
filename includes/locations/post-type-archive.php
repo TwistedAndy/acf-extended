@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_location_post_type_archive')) {
-	return;
-}
-
 class acfe_location_post_type_archive {
 
 	public $post_type = false;
@@ -48,11 +44,6 @@ class acfe_location_post_type_archive {
 
 			// capability
 			$capability = acf_get_setting('capability');
-			$capability = apply_filters_deprecated("acfe/post_type_archive_capability", [$capability, $name], '0.8.9.1', "acfe/validate_post_type_archive");
-			$capability = apply_filters_deprecated("acfe/post_type_archive_capability/name={$name}", [
-				$capability,
-				$name
-			], '0.8.9.1', "acfe/validate_post_type_archive/name={$name}");
 
 			// arguments
 			$args = [

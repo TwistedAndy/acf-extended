@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_textarea')) {
-	return;
-}
-
 class acfe_field_textarea extends acfe_field_extend {
 
 	/**

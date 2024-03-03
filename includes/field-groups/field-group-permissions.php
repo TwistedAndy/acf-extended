@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_group_permissions')) {
-	return;
-}
-
 class acfe_field_group_permissions {
 
 	/**

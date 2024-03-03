@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content_controls')) {
-	return;
-}
-
 class acfe_field_flexible_content_controls {
 
 	/**
@@ -215,10 +211,6 @@ class acfe_field_flexible_content_controls {
 
 		// Filters
 		$icons = apply_filters("acfe/flexible/layouts/icons", $icons, $layout, $field);
-		$icons = apply_filters("acfe/flexible/layouts/icons/name={$name}", $icons, $layout, $field);
-		$icons = apply_filters("acfe/flexible/layouts/icons/key={$key}", $icons, $layout, $field);
-		$icons = apply_filters("acfe/flexible/layouts/icons/name={$name}&layout={$l_name}", $icons, $layout, $field);
-		$icons = apply_filters("acfe/flexible/layouts/icons/key={$key}&layout={$l_name}", $icons, $layout, $field);
 
 		if (!empty($icons)) { ?>
 			<div class="acf-fc-layout-controls">

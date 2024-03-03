@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_settings')) {
-	return;
-}
-
 class acfe_settings {
 
 	// vars

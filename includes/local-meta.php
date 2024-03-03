@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('ACFE_Local_Meta')) {
-	return;
-}
-
 class ACFE_Local_Meta {
 
 	// vars

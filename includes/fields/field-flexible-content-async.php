@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content_async')) {
-	return;
-}
-
 class acfe_field_flexible_content_async {
 
 	/**
@@ -182,11 +178,6 @@ class acfe_field_flexible_content_async {
 		];
 
 		$div = apply_filters("acfe/flexible/layouts/div", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/name={$name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/key={$key}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/name={$name}&layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/key={$key}&layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
 
 		echo '<div ' . acf_esc_atts($div) . '></div>';
 

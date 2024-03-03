@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('ACFE_AutoSync')) {
-	return;
-}
-
 class ACFE_AutoSync {
 
 	// vars

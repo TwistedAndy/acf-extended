@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content_preview')) {
-	return;
-}
-
 class acfe_field_flexible_content_preview {
 
 	/**
@@ -190,11 +186,6 @@ class acfe_field_flexible_content_preview {
 
 		// Template
 		$prepend = apply_filters("acfe/flexible/prepend/template", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/template/name={$name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/template/key={$key}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/template/layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/template/name={$name}&layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/template/key={$key}&layout={$l_name}", $prepend, $flexible, $layout);
 
 		acf_render_field_wrap([
 			'prepend' => $prepend,
@@ -209,11 +200,6 @@ class acfe_field_flexible_content_preview {
 
 		// Style
 		$prepend = apply_filters("acfe/flexible/prepend/style", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/style/name={$name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/style/key={$key}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/style/layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/style/name={$name}&layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/style/key={$key}&layout={$l_name}", $prepend, $flexible, $layout);
 
 		acf_render_field_wrap([
 			'prepend' => $prepend,
@@ -228,11 +214,6 @@ class acfe_field_flexible_content_preview {
 
 		// Script
 		$prepend = apply_filters("acfe/flexible/prepend/script", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/script/name={$name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/script/key={$key}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/script/layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/script/name={$name}&layout={$l_name}", $prepend, $flexible, $layout);
-		$prepend = apply_filters("acfe/flexible/prepend/script/key={$key}&layout={$l_name}", $prepend, $flexible, $layout);
 
 		acf_render_field_wrap([
 			'prepend' => $prepend,
@@ -269,8 +250,6 @@ class acfe_field_flexible_content_preview {
 
 		// actions
 		do_action("acfe/flexible/enqueue", $field, $is_preview);
-		do_action("acfe/flexible/enqueue/name={$name}", $field, $is_preview);
-		do_action("acfe/flexible/enqueue/key={$key}", $field, $is_preview);
 
 		// loop
 		foreach ($field['layouts'] as $layout) {
@@ -335,11 +314,6 @@ class acfe_field_flexible_content_preview {
 		];
 
 		$placeholder = apply_filters("acfe/flexible/layouts/placeholder", $placeholder, $layout, $field, $i, $value, $prefix);
-		$placeholder = apply_filters("acfe/flexible/layouts/placeholder/name={$name}", $placeholder, $layout, $field, $i, $value, $prefix);
-		$placeholder = apply_filters("acfe/flexible/layouts/placeholder/key={$key}", $placeholder, $layout, $field, $i, $value, $prefix);
-		$placeholder = apply_filters("acfe/flexible/layouts/placeholder/layout={$l_name}", $placeholder, $layout, $field, $i, $value, $prefix);
-		$placeholder = apply_filters("acfe/flexible/layouts/placeholder/name={$name}&layout={$l_name}", $placeholder, $layout, $field, $i, $value, $prefix);
-		$placeholder = apply_filters("acfe/flexible/layouts/placeholder/key={$key}&layout={$l_name}", $placeholder, $layout, $field, $i, $value, $prefix);
 
 		$html = false;
 
@@ -443,14 +417,6 @@ class acfe_field_flexible_content_preview {
 
 				global $post;
 				$_post = $post;
-
-				// Deprecated
-				do_action_deprecated("acfe/flexible/preview/name={$name}", [$field, $layout], '0.8.6.7');
-				do_action_deprecated("acfe/flexible/preview/key={$key}", [$field, $layout], '0.8.6.7');
-				do_action_deprecated("acfe/flexible/layout/preview/layout={$l_name}", [$field, $layout], '0.8.6.7');
-				do_action_deprecated("acfe/flexible/layout/preview/name={$name}&layout={$l_name}", [$field, $layout], '0.8.6.7');
-				do_action_deprecated("acfe/flexible/layout/preview/key={$key}&layout={$l_name}", [$field, $layout], '0.8.6.7');
-				do_action_deprecated("acfe/flexible/preview", [$field, $layout], '0.8.6.7');
 
 				// Template
 				acfe_flexible_render_layout_template($layout, $field);

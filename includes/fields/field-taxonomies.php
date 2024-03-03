@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_taxonomies')) {
-	return;
-}
-
 class acfe_field_taxonomies extends acf_field {
 
 	/**

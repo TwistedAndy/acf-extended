@@ -9,10 +9,6 @@ if (!acf_get_setting('acfe/modules/categories')) {
 	return;
 }
 
-if (class_exists('acfe_field_group_category')) {
-	return;
-}
-
 class acfe_field_group_category {
 
 	/**

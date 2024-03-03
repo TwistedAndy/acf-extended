@@ -8,10 +8,6 @@ if (acf_version_compare($GLOBALS['wp_version'], '<', '4.9')) {
 	return;
 }
 
-if (class_exists('acfe_field_code_editor')) {
-	return;
-}
-
 class acfe_field_code_editor extends acf_field {
 
 	// vars

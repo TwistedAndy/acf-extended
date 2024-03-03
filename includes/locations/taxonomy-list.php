@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_location_taxonomy_list')) {
-	return;
-}
-
 class acfe_location_taxonomy_list {
 
 	// vars

@@ -9,10 +9,6 @@ if (!acfe_is_acf_6()) {
 	return;
 }
 
-if (class_exists('acfe_admin_compatibility')) {
-	return;
-}
-
 class acfe_admin_compatibility {
 
 	/**

@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_groups_export')) {
-	return;
-}
-
 class acfe_field_groups_export extends ACF_Admin_Tool {
 
 	function initialize() {

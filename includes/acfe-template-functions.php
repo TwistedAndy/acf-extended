@@ -53,13 +53,8 @@ if (!function_exists('get_flexible')) {
 					$is_preview = false;
 				}
 
-				$name = $field['_name'];
-				$key = $field['key'];
-
 				// Actions
 				do_action("acfe/flexible/enqueue", $field, $is_preview);
-				do_action("acfe/flexible/enqueue/name={$name}", $field, $is_preview);
-				do_action("acfe/flexible/enqueue/key={$key}", $field, $is_preview);
 
 			}
 
@@ -135,56 +130,9 @@ function acfe_flexible_render_layout_template($layout, $field) {
 
 	// Filters
 	$file = apply_filters("acfe/flexible/render/template", $file, $field, $layout, $is_preview);
-	$file = apply_filters("acfe/flexible/render/template/name={$name}", $file, $field, $layout, $is_preview);
-	$file = apply_filters("acfe/flexible/render/template/key={$key}", $file, $field, $layout, $is_preview);
-	$file = apply_filters("acfe/flexible/render/template/layout={$l_name}", $file, $field, $layout, $is_preview);
-	$file = apply_filters("acfe/flexible/render/template/name={$name}&layout={$l_name}", $file, $field, $layout, $is_preview);
-	$file = apply_filters("acfe/flexible/render/template/key={$key}&layout={$l_name}", $file, $field, $layout, $is_preview);
-
-	// Deprecated
-	$file = apply_filters_deprecated("acfe/flexible/layout/render/template/layout={$l_name}", [
-		$file,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/template/layout={$l_name}");
-	$file = apply_filters_deprecated("acfe/flexible/layout/render/template/name={$name}&layout={$l_name}", [
-		$file,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/template/name={$name}&layout={$l_name}");
-	$file = apply_filters_deprecated("acfe/flexible/layout/render/template/key={$key}&layout={$l_name}", [
-		$file,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/template/key={$key}&layout={$l_name}");
 
 	// Before Template
 	do_action("acfe/flexible/render/before_template", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/before_template/name={$name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/before_template/key={$key}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/before_template/layout={$l_name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/before_template/name={$name}&layout={$l_name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/before_template/key={$key}&layout={$l_name}", $field, $layout, $is_preview);
-
-	// Deprecated
-	do_action_deprecated("acfe/flexible/layout/render/before_template/layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/before_template/layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/render/before_template/name={$name}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/before_template/name={$name}&layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/render/before_template/key={$key}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/before_template/key={$key}&layout={$l_name}");
 
 	// Check file
 	if (!empty($file)) {
@@ -229,28 +177,6 @@ function acfe_flexible_render_layout_template($layout, $field) {
 
 	// After Template
 	do_action("acfe/flexible/render/after_template", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/after_template/name={$name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/after_template/key={$key}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/after_template/layout={$l_name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/after_template/name={$name}&layout={$l_name}", $field, $layout, $is_preview);
-	do_action("acfe/flexible/render/after_template/key={$key}&layout={$l_name}", $field, $layout, $is_preview);
-
-	// Deprecated
-	do_action_deprecated("acfe/flexible/layout/render/after_template/layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/after_template/layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/render/after_template/name={$name}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/after_template/name={$name}&layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/render/after_template/key={$key}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/after_template/key={$key}&layout={$l_name}");
 
 }
 
@@ -284,48 +210,10 @@ function acfe_flexible_render_layout_enqueue($layout, $field) {
 	do_action("acfe/flexible/enqueue/name={$name}&layout={$l_name}", $field, $layout, $is_preview);
 	do_action("acfe/flexible/enqueue/key={$key}&layout={$l_name}", $field, $layout, $is_preview);
 
-	// Deprecated
-	do_action_deprecated("acfe/flexible/layout/enqueue/layout={$l_name}", [$field, $layout, $is_preview], '0.8.6.7', "acfe/flexible/enqueue/layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/enqueue/name={$name}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/enqueue/name={$name}&layout={$l_name}");
-	do_action_deprecated("acfe/flexible/layout/enqueue/key={$key}&layout={$l_name}", [
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/enqueue/key={$key}&layout={$l_name}");
-
 	/**
 	 * Style
 	 */
 	$style = apply_filters("acfe/flexible/render/style", $style, $field, $layout, $is_preview);
-	$style = apply_filters("acfe/flexible/render/style/name={$name}", $style, $field, $layout, $is_preview);
-	$style = apply_filters("acfe/flexible/render/style/key={$key}", $style, $field, $layout, $is_preview);
-	$style = apply_filters("acfe/flexible/render/style/layout={$l_name}", $style, $field, $layout, $is_preview);
-	$style = apply_filters("acfe/flexible/render/style/name={$name}&layout={$l_name}", $style, $field, $layout, $is_preview);
-	$style = apply_filters("acfe/flexible/render/style/key={$key}&layout={$l_name}", $style, $field, $layout, $is_preview);
-
-	// Deprecated
-	$style = apply_filters_deprecated("acfe/flexible/layout/render/style/layout={$l_name}", [
-		$style,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/style/layout={$l_name}");
-	$style = apply_filters_deprecated("acfe/flexible/layout/render/style/name={$name}&layout={$l_name}", [
-		$style,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/style/name={$name}&layout={$l_name}");
-	$style = apply_filters_deprecated("acfe/flexible/layout/render/style/key={$key}&layout={$l_name}", [
-		$style,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/style/key={$key}&layout={$l_name}");
 
 	// Check
 	if (!empty($style)) {
@@ -367,31 +255,6 @@ function acfe_flexible_render_layout_enqueue($layout, $field) {
 	 * Script
 	 */
 	$script = apply_filters("acfe/flexible/render/script", $script, $field, $layout, $is_preview);
-	$script = apply_filters("acfe/flexible/render/script/name={$name}", $script, $field, $layout, $is_preview);
-	$script = apply_filters("acfe/flexible/render/script/key={$key}", $script, $field, $layout, $is_preview);
-	$script = apply_filters("acfe/flexible/render/script/layout={$l_name}", $script, $field, $layout, $is_preview);
-	$script = apply_filters("acfe/flexible/render/script/name={$name}&layout={$l_name}", $script, $field, $layout, $is_preview);
-	$script = apply_filters("acfe/flexible/render/script/key={$key}&layout={$l_name}", $script, $field, $layout, $is_preview);
-
-	// Deprecated
-	$script = apply_filters_deprecated("acfe/flexible/layout/render/script/layout={$l_name}", [
-		$script,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/script/layout={$l_name}");
-	$script = apply_filters_deprecated("acfe/flexible/layout/render/script/name={$name}&layout={$l_name}", [
-		$script,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/script/name={$name}&layout={$l_name}");
-	$script = apply_filters_deprecated("acfe/flexible/layout/render/script/key={$key}&layout={$l_name}", [
-		$script,
-		$field,
-		$layout,
-		$is_preview
-	], '0.8.6.7', "acfe/flexible/render/script/key={$key}&layout={$l_name}");
 
 	// Check
 	if (!empty($script)) {

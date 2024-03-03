@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_post_object')) {
-	return;
-}
-
 class acfe_field_post_object extends acfe_field_extend {
 
 	/**

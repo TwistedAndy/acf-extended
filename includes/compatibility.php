@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_compatibility')) {
-	return;
-}
-
 class acfe_compatibility {
 
 	/**
@@ -17,7 +13,6 @@ class acfe_compatibility {
 
 		// global
 		add_action('acf/init', [$this, 'acf_init'], 98);
-		add_action('acfe/init', [$this, 'acfe_init'], 99);
 
 		// fields
 		add_filter('acf/validate_field_group', [$this, 'field_group_location_list'], 20);
@@ -57,10 +52,6 @@ class acfe_compatibility {
 			'php_load' => 'acfe/php_load',
 			'php_found' => 'acfe/php_found',
 			'acfe/modules/dynamic_block_types' => 'acfe/modules/block_types',
-			'acfe/modules/dynamic_forms' => 'acfe/modules/forms',
-			'acfe/modules/dynamic_options_pages' => 'acfe/modules/options_pages',
-			'acfe/modules/dynamic_post_types' => 'acfe/modules/post_types',
-			'acfe/modules/dynamic_taxonomies' => 'acfe/modules/taxonomies',
 		];
 
 		// loop settings
@@ -71,39 +62,9 @@ class acfe_compatibility {
 
 			if ($value !== null) {
 
-				// deprecated notice
-				acfe_deprecated_setting($old, '0.8', $new);
-
 				// update setting
 				acf_update_setting($new, $value);
 
-			}
-
-		}
-
-	}
-
-
-	/**
-	 * acfe_init
-	 *
-	 * acfe/init:99
-	 *
-	 * @since 0.8.9.3 (03/2023)
-	 */
-	function acfe_init() {
-
-		// get old setting
-		$setting = acf_get_setting('acfe/modules/single_meta');
-
-		if ($setting !== null) {
-
-			// deprecated notice
-			acfe_deprecated_setting('acfe/modules/single_meta', '0.8.9.3', 'acfe/modules/performance');
-
-			// update setting
-			if ($setting) {
-				acf_update_setting('acfe/modules/performance', 'ultra');
 			}
 
 		}

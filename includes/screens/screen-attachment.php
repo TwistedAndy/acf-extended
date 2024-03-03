@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_screen_attachment')) {
-	return;
-}
-
 class acfe_screen_attachment {
 
 	// vars

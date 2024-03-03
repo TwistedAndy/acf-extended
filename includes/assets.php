@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_assets')) {
-	return;
-}
-
 class acfe_assets {
 
 	/**

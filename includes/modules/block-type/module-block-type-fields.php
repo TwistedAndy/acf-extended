@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_module_block_type_field_groups')) {
-	return;
-}
-
 class acfe_module_block_type_field_groups {
 
 	/**

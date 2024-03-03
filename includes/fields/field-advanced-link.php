@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_advanced_link')) {
-	return;
-}
-
 class acfe_field_advanced_link extends acf_field {
 
 	/**
@@ -261,23 +257,6 @@ class acfe_field_advanced_link extends acf_field {
 			'required' => false,
 			'class' => 'input-target',
 		];
-
-		// deprecated
-		$sub_fields = apply_filters_deprecated('acfe/fields/advanced_link/fields', [
-			$sub_fields,
-			$field,
-			$value
-		], '0.8.1', 'acfe/fields/advanced_link/sub_fields');
-		$sub_fields = apply_filters_deprecated('acfe/fields/advanced_link/fields/name=' . $field['_name'], [
-			$sub_fields,
-			$field,
-			$value
-		], '0.8.1', 'acfe/fields/advanced_link/sub_fields/name=' . $field['_name']);
-		$sub_fields = apply_filters_deprecated('acfe/fields/advanced_link/fields/key=' . $field['key'], [
-			$sub_fields,
-			$field,
-			$value
-		], '0.8.1', 'acfe/fields/advanced_link/sub_fields/key=' . $field['key']);
 
 		// filters
 		$sub_fields = apply_filters('acfe/fields/advanced_link/sub_fields', $sub_fields, $field, $value);

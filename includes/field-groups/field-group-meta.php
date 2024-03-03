@@ -9,10 +9,6 @@ if (acfe_get_setting('modules/field_group_ui')) {
 	return;
 }
 
-if (class_exists('acfe_field_group_meta')) {
-	return;
-}
-
 class acfe_field_group_meta {
 
 	/**

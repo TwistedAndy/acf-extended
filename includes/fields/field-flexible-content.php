@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content')) {
-	return;
-}
-
 class acfe_field_flexible_content extends acfe_field_extend {
 
 	/**
@@ -136,18 +132,8 @@ class acfe_field_flexible_content extends acfe_field_extend {
 
 		$layout = $flexible['layouts'][$_layout_key];
 
-		// Vars
-		$name = $flexible['name'];
-		$key = $flexible['key'];
-		$l_name = $layout['name'];
-
 		// Do Actions
 		do_action("acfe/flexible/render_layout_settings", $flexible, $layout, $prefix);
-		do_action("acfe/flexible/render_layout_settings/name={$name}", $flexible, $layout, $prefix);
-		do_action("acfe/flexible/render_layout_settings/key={$key}", $flexible, $layout, $prefix);
-		do_action("acfe/flexible/render_layout_settings/layout={$l_name}", $flexible, $layout, $prefix);
-		do_action("acfe/flexible/render_layout_settings/name={$name}&layout={$l_name}", $flexible, $layout, $prefix);
-		do_action("acfe/flexible/render_layout_settings/key={$key}&layout={$l_name}", $flexible, $layout, $prefix);
 
 	}
 
@@ -235,20 +221,10 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			// Prepend
 			$prepend = '';
 			$prepend = apply_filters("acfe/flexible/layouts/label_prepend", $prepend, $layout, $field);
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend/name={$name}", $prepend, $layout, $field);
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend/key={$key}", $prepend, $layout, $field);
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend/layout={$l_name}", $prepend, $layout, $field);
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend/name={$name}&layout={$l_name}", $prepend, $layout, $field);
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend/key={$key}&layout={$l_name}", $prepend, $layout, $field);
 
 			// Atts
 			$atts = [];
 			$atts = apply_filters("acfe/flexible/layouts/label_atts", $atts, $layout, $field);
-			$atts = apply_filters("acfe/flexible/layouts/label_atts/name={$name}", $atts, $layout, $field);
-			$atts = apply_filters("acfe/flexible/layouts/label_atts/key={$key}", $atts, $layout, $field);
-			$atts = apply_filters("acfe/flexible/layouts/label_atts/layout={$l_name}", $atts, $layout, $field);
-			$atts = apply_filters("acfe/flexible/layouts/label_atts/name={$name}&layout={$l_name}", $atts, $layout, $field);
-			$atts = apply_filters("acfe/flexible/layouts/label_atts/key={$key}&layout={$l_name}", $atts, $layout, $field);
 
 			// Label
 			$layout['label'] = $prepend . '<span ' . acf_esc_atts($atts) . '>' . $layout['label'] . '</span>';
@@ -279,15 +255,7 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			return $fields;
 		}
 
-		// vars
-		$name = $field['name'];
-		$key = $field['key'];
-
-		$fields = apply_filters("acfe/flexible/load_fields", $fields, $field);
-		$fields = apply_filters("acfe/flexible/load_fields/name={$name}", $fields, $field);
-		$fields = apply_filters("acfe/flexible/load_fields/key={$key}", $fields, $field);
-
-		return $fields;
+		return apply_filters("acfe/flexible/load_fields", $fields, $field);
 
 	}
 
@@ -353,8 +321,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		];
 
 		$values = apply_filters("acfe/flexible/div_values", $values, $field);
-		$values = apply_filters("acfe/flexible/div_values/name={$name}", $values, $field);
-		$values = apply_filters("acfe/flexible/div_values/key={$key}", $values, $field);
 
 		?>
 		<div <?php echo acf_esc_atts($div); ?>>
@@ -374,11 +340,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 					// Models
 					$model = false;
 					$model = apply_filters("acfe/flexible/layouts/model", $model, $field, $layout);
-					$model = apply_filters("acfe/flexible/layouts/model/name={$name}", $model, $field, $layout);
-					$model = apply_filters("acfe/flexible/layouts/model/key={$key}", $model, $field, $layout);
-					$model = apply_filters("acfe/flexible/layouts/model/layout={$l_name}", $model, $field, $layout);
-					$model = apply_filters("acfe/flexible/layouts/model/name={$name}&layout={$l_name}", $model, $field, $layout);
-					$model = apply_filters("acfe/flexible/layouts/model/key={$key}&layout={$l_name}", $model, $field, $layout);
 
 					if (!$model) {
 						$this->render_layout($field, $layout, 'acfcloneindex', []);
@@ -410,8 +371,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			// Remove actions
 			$remove_actions = false;
 			$remove_actions = apply_filters("acfe/flexible/remove_actions", $remove_actions, $field);
-			$remove_actions = apply_filters("acfe/flexible/remove_actions/name={$name}", $remove_actions, $field);
-			$remove_actions = apply_filters("acfe/flexible/remove_actions/key={$key}", $remove_actions, $field);
 
 			if (!$remove_actions) {
 
@@ -441,8 +400,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 
 					$secondary_actions = [];
 					$secondary_actions = apply_filters("acfe/flexible/secondary_actions", $secondary_actions, $field);
-					$secondary_actions = apply_filters("acfe/flexible/secondary_actions/name={$name}", $secondary_actions, $field);
-					$secondary_actions = apply_filters("acfe/flexible/secondary_actions/key={$key}", $secondary_actions, $field);
 
 					if (!empty($secondary_actions)) {
 
@@ -533,11 +490,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		}
 
 		$div = apply_filters("acfe/flexible/layouts/div", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/name={$name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/key={$key}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/name={$name}&layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
-		$div = apply_filters("acfe/flexible/layouts/div/key={$key}&layout={$l_name}", $div, $layout, $field, $i, $value, $prefix);
 
 		// handle
 		$handle = [
@@ -547,11 +499,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		];
 
 		$handle = apply_filters("acfe/flexible/layouts/handle", $handle, $layout, $field, $i, $value, $prefix);
-		$handle = apply_filters("acfe/flexible/layouts/handle/name={$name}", $handle, $layout, $field, $i, $value, $prefix);
-		$handle = apply_filters("acfe/flexible/layouts/handle/key={$key}", $handle, $layout, $field, $i, $value, $prefix);
-		$handle = apply_filters("acfe/flexible/layouts/handle/layout={$l_name}", $handle, $layout, $field, $i, $value, $prefix);
-		$handle = apply_filters("acfe/flexible/layouts/handle/name={$name}&layout={$l_name}", $handle, $layout, $field, $i, $value, $prefix);
-		$handle = apply_filters("acfe/flexible/layouts/handle/key={$key}&layout={$l_name}", $handle, $layout, $field, $i, $value, $prefix);
 
 		// remove row
 		// This makes Flexible Content in ACFE Form buggy in a Flexible Content Preview
@@ -569,18 +516,8 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			<?php
 
 			$layout = apply_filters("acfe/flexible/prepare_layout", $layout, $field, $i, $value, $prefix);
-			$layout = apply_filters("acfe/flexible/prepare_layout/name={$name}", $layout, $field, $i, $value, $prefix);
-			$layout = apply_filters("acfe/flexible/prepare_layout/key={$key}", $layout, $field, $i, $value, $prefix);
-			$layout = apply_filters("acfe/flexible/prepare_layout/layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			$layout = apply_filters("acfe/flexible/prepare_layout/name={$name}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			$layout = apply_filters("acfe/flexible/prepare_layout/key={$key}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
 
 			do_action("acfe/flexible/pre_render_layout", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/pre_render_layout/name={$name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/pre_render_layout/key={$key}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/pre_render_layout/layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/pre_render_layout/name={$name}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/pre_render_layout/key={$key}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
 
 			// Prepare Editor
 			add_filter('acf/prepare_field/type=wysiwyg', [$this, 'prepare_layout_editor']);
@@ -592,11 +529,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			remove_filter('acf/prepare_field/type=wysiwyg', [$this, 'prepare_layout_editor']);
 
 			do_action("acfe/flexible/render_layout", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/render_layout/name={$name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/render_layout/key={$key}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/render_layout/layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/render_layout/name={$name}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
-			do_action("acfe/flexible/render_layout/key={$key}&layout={$l_name}", $layout, $field, $i, $value, $prefix);
 
 			?>
 
@@ -679,8 +611,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 
 		// filters
 		$title = apply_filters("acf/fields/flexible_content/layout_title", $title, $field, $layout, $i);
-		$title = apply_filters("acf/fields/flexible_content/layout_title/name={$field['_name']}", $title, $field, $layout, $i);
-		$title = apply_filters("acf/fields/flexible_content/layout_title/key={$field['key']}", $title, $field, $layout, $i);
 
 		if (in_array('title', $field['acfe_flexible_add_actions'])) {
 
@@ -700,8 +630,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		];
 
 		$attrs = apply_filters("acf/fields/flexible_content/layout_attrs", $attrs, $field, $layout, $i);
-		$attrs = apply_filters("acf/fields/flexible_content/layout_attrs/name={$field['_name']}", $attrs, $field, $layout, $i);
-		$attrs = apply_filters("acf/fields/flexible_content/layout_attrs/key={$field['key']}", $attrs, $field, $layout, $i);
 
 		// remove loop
 		acf_remove_loop();

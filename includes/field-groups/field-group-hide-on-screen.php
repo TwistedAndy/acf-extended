@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_group_hide_on_screen')) {
-	return;
-}
-
 class acfe_field_group_hide_on_screen {
 
 	/**

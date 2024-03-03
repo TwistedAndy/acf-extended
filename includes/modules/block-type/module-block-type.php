@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_module_block_type')) {
-	return;
-}
-
 class acfe_module_block_type extends acfe_module {
 
 	/**

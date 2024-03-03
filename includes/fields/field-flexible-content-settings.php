@@ -4,10 +4,6 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-if (class_exists('acfe_field_flexible_content_settings')) {
-	return;
-}
-
 class acfe_field_flexible_content_settings {
 
 	/**
