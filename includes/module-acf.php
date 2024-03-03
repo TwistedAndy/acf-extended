@@ -25,7 +25,6 @@ class acfe_module_acf{
         add_action('acf/include_admin_tools', array($this, 'include_admin_tools'), 15);
         add_action('acf/include_admin_tools', array($this, 'include_admin_tools_sort'), 99);
         add_filter('acf/get_post_types',      array($this, 'get_post_types'), 10, 2);
-        //add_filter('wp_insert_post_data',     array($this, 'wp_insert_post_data'), 10, 2);
     
     }
     
@@ -85,11 +84,11 @@ class acfe_module_acf{
                 $field = acf_get_field($key);
                 $value = get_field($key);
                 $valid = $module->{"validate_{$name}"}($value, $item);
-            
-                // empty required
-                if($field && $field['required'] && empty($value) && !is_numeric($value)){
-                    $valid = sprintf(__('%s value is required', 'acf'), $field['label']);
-                }
+
+	            // empty required
+	            if (is_array($field) && $field['required'] && empty($value) && !is_numeric($value)) {
+		            $valid = sprintf(__('%s value is required', 'acf'), $field['label']);
+	            }
             
                 // allow $valid to be a custom error message
                 if(!empty($valid) && is_string($valid)){
@@ -192,10 +191,10 @@ class acfe_module_acf{
                 
                 $v = $item[ $k ];
                 $_field = acf_get_field($k);
-        
-                if(!$_field){
-                    continue;
-                }
+
+	            if (!is_array($_field) or empty($_field['type'])) {
+		            continue;
+	            }
         
                 // encode value
                 if(acf_maybe_get($_field, 'encode_value')){

@@ -285,22 +285,19 @@ class acfe_bidirectional{
         $values = acf_get_array($field['value']);
         $r_fields = array();
         $r_field_update = false;
-        
-        foreach($values as $i => $value){
-            
-            $r_field = acf_get_field($value);
-            
-            if($r_field){
-                $r_fields[] = $r_field;
-                
-            }else{
-                
-                unset($values[$i]);
-                $r_field_update = true;
-                
-            }
-            
-        }
+
+	    foreach ($values as $i => $value) {
+
+		    $r_field = acf_get_field($value);
+
+		    if (is_array($r_field)) {
+			    $r_fields[] = $r_field;
+		    } else {
+			    unset($values[$i]);
+			    $r_field_update = true;
+		    }
+
+	    }
         
         if($r_field_update){
             

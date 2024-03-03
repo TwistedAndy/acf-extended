@@ -123,7 +123,11 @@ class acfe_field_flexible_content extends acfe_field_extend{
         
         // Profit!
         $flexible = acf_get_field($_field_id);
-        
+
+		if (!is_array($flexible) or empty($flexible['type'])) {
+			return;
+		}
+
         if(!acf_maybe_get($flexible, 'layouts')){
             return;
         }
@@ -617,17 +621,17 @@ class acfe_field_flexible_content extends acfe_field_extend{
         ));
         
         // load field
-        $field = acf_get_field($options['field_key']);
-        
-        if(!$field){
-            die();
-        }
+	    $field = acf_get_field($options['field_key']);
+
+	    if (empty($field) or empty($field['type'])) {
+		    exit();
+	    }
         
         // vars
         $layout = $this->instance->get_layout($options['layout'], $field);
         
         if(!$layout){
-            die();
+	        exit();
         }
         
         // title
@@ -635,7 +639,7 @@ class acfe_field_flexible_content extends acfe_field_extend{
         
         // echo
         echo $title;
-        die();
+	    exit();
         
     }
     

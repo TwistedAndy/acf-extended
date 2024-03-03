@@ -84,6 +84,11 @@ class acfe_form_email{
                 
                 // Force Array
                 $field = acf_get_field($file_field_key);
+
+				if (!is_array($field)) {
+					continue;
+				}
+
                 $field['return_format'] = 'array';
                 
                 $files = acf_format_value($file_id, 0, $field);

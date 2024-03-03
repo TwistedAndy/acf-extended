@@ -144,11 +144,12 @@ class acfe_form_term{
         if(!empty($load_meta)){
             
             foreach($load_meta as $field_key){
-    
-                $field = acf_get_field($field_key);
-    
-                if(!$field)
-                    continue;
+
+	            $field = acf_get_field($field_key);
+
+	            if (!is_array($field)) {
+		            continue;
+	            }
     
                 if($field['type'] === 'clone' && $field['display'] === 'seamless'){
         

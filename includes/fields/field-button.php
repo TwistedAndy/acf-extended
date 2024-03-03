@@ -46,9 +46,9 @@ class acfe_field_button extends acf_field{
         $field = acf_get_field($field_key);
         
         // field not found
-        if(!$field){
-            die;
-        }
+	    if (!is_array($field) or empty($field['type'])) {
+		    exit();
+	    }
         
         // setup meta
         acfe_setup_meta($acf, 'acfe/button', true);
@@ -60,8 +60,8 @@ class acfe_field_button extends acf_field{
         
         // reset
         acfe_reset_meta();
-        
-        die;
+
+	    exit();
         
     }
     

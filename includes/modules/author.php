@@ -74,22 +74,6 @@ class acfe_author{
         // add metabox
         add_meta_box('acfe-author', __('Author'), array($this, 'render_meta_box'), $post_type, 'side', 'core', array());
         
-        // generate postbox
-        // $postboxes = array();
-        // $postboxes[] = array(
-        //     'id' => 'acfe-author',
-        // );
-        
-        // get postboxes
-        // $data = acf_get_instance('ACF_Assets')->data;
-        // $acf_postboxes = acf_maybe_get($data, 'postboxes', array());
-        // $acf_postboxes = array_merge($acf_postboxes, $postboxes);
-        
-        // localize postboxes
-        // acf_localize_data(array(
-        //     'postboxes' => $acf_postboxes
-        // ));
-        
     }
     
     
@@ -103,7 +87,11 @@ class acfe_author{
         
         // retrieve field
         $field = acf_get_field('acfe_author');
-        
+
+		if (!is_array($field) or empty($field['type'])) {
+			return;
+		}
+
         // add value
         $field['prefix'] = '';
         $field['value'] = get_post_field('post_author', $post->ID);

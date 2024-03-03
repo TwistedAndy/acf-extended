@@ -277,8 +277,13 @@ class acfe_dynamic_forms extends acfe_dynamic_module{
                             }
                             
                             foreach($array as $field_key => $field_label){
-                                
-                                $field = acf_get_field($field_key);
+
+	                            $field = acf_get_field($field_key);
+
+	                            if (!is_array($field)) {
+		                            continue;
+	                            }
+
                                 $type = acf_get_field_type($field['type']);
                                 $type_label = '-';
                                 if(isset($type->label))

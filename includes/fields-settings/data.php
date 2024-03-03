@@ -36,14 +36,20 @@ class acfe_field_data{
     }
     
     function render_field($field){
-    
+
+		if (!is_array($field) or empty($field['value'])) {
+			return;
+		}
+
         $id = $field['value'];
-        
-        // validate
-        if(!$id) return;
         
         // Field
         $field = acf_get_field($id);
+
+		if (!is_array($field) or empty($field['type'])) {
+			return;
+		}
+
         $field = array_map(function($value){
             
             if(is_array($value)) return $value;

@@ -13,33 +13,37 @@ if(!defined('ABSPATH')){
  *
  * @return array|false|mixed|void|null
  */
-function acfe_get_field_group_from_field($field){
-    
-    // allow field key or name
-    if(!is_array($field)){
-        $field = acf_get_field($field);
-    }
-    
-    // check parent exists
-    if(!acf_maybe_get($field, 'parent')){
-        return false;
-    }
-    
-    // get parent fields and reverse order (top field first)
-    $ancestors = acf_get_field_ancestors($field);
-    $ancestors = array_reverse($ancestors);
-    
-    // no ancestors, return field group
-    if(!$ancestors){
-        return acf_get_field_group($field['parent']);
-    }
-    
-    // retrieve top field
-    $top_field = acf_get_field($ancestors[0]);
-    
-    // return
-    return acf_get_field_group($top_field['parent']);
-    
+function acfe_get_field_group_from_field($field) {
+
+	// allow field key or name
+	if (!is_array($field) or empty($field['type'])) {
+		$field = acf_get_field($field);
+	}
+
+	// check parent exists
+	if (!acf_maybe_get($field, 'parent')) {
+		return false;
+	}
+
+	// get parent fields and reverse order (top field first)
+	$ancestors = acf_get_field_ancestors($field);
+	$ancestors = array_reverse($ancestors);
+
+	// no ancestors, return field group
+	if (empty($ancestors)) {
+		return acf_get_field_group($field['parent']);
+	}
+
+	// retrieve top field
+	$top_field = acf_get_field(reset($ancestors));
+
+	if (!is_array($field) or empty($field['type'])) {
+		return;
+	}
+
+	// return
+	return acf_get_field_group($top_field['parent']);
+
 }
 
 /**
@@ -51,36 +55,40 @@ function acfe_get_field_group_from_field($field){
  *
  * @return array
  */
-function acfe_get_field_descendants($field){
-    
-    // allow field key or name
-    if(!is_array($field)){
-        $field = acf_get_field($field);
-    }
-    
-    // var
-    $descendants = array();
-    $sub_fields = acf_get_fields($field);
-    
-    // no sub fields
-    if(!$sub_fields){
-        return $descendants;
-    }
-    
-    // loop sub fields
-    foreach($sub_fields as $sub_field){
-        
-        $descendants[] = $sub_field['ID'] ? $sub_field['ID'] : $sub_field['key'];
-        
-        if(isset($sub_field['sub_fields'])){
-            $descendants = array_merge($descendants, acfe_get_field_descendants($sub_field));
-        }
-        
-    }
-    
-    // return
-    return $descendants;
-    
+function acfe_get_field_descendants($field) {
+
+	// allow field key or name
+	if (!is_array($field)) {
+		$field = acf_get_field($field);
+	}
+
+	if (!is_array($field) or empty($field['type'])) {
+		return [];
+	}
+
+	// var
+	$descendants = [];
+	$sub_fields = acf_get_fields($field);
+
+	// no sub fields
+	if (!$sub_fields) {
+		return $descendants;
+	}
+
+	// loop sub fields
+	foreach ($sub_fields as $sub_field) {
+
+		$descendants[] = $sub_field['ID'] ? $sub_field['ID'] : $sub_field['key'];
+
+		if (isset($sub_field['sub_fields'])) {
+			$descendants = array_merge($descendants, acfe_get_field_descendants($sub_field));
+		}
+
+	}
+
+	// return
+	return $descendants;
+
 }
 
 /**

@@ -230,9 +230,13 @@ class acfe_field_flexible_content_settings{
                 'parent_layout'         => $layout['key'],
                 'parent'                => $field['key']
             ));
-            
-            // Add sub field
-            array_unshift($fields, acf_get_field($key));
+
+			$sub_field = acf_get_field($key);
+
+			if (is_array($sub_field) and !empty($sub_field['type'])){
+				// Add sub field
+				array_unshift($fields, $sub_field);
+			}
             
         }
         

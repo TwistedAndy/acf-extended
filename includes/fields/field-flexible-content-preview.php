@@ -401,12 +401,13 @@ class acfe_field_flexible_content_preview{
             ));
             
         }
-        
-        // Load field
-        $field = acf_get_field($options['field_key']);
-        if(!$field){
-            return $this->return_or_die();
-        }
+
+	    // Load field
+	    $field = acf_get_field($options['field_key']);
+
+	    if (!is_array($field) or empty($field['type'])) {
+		    return $this->return_or_die();
+	    }
         
         // Layout
         $instance = acf_get_field_type('flexible_content');

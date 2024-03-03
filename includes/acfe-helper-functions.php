@@ -557,7 +557,7 @@ function acfe_add_validation_error($selector = '', $message = ''){
     }
     
     // field not found: add general error
-    if(!$field){
+    if(!is_array($field) or empty($field['type'])){
         return acf_add_validation_error('', $message);
     }
     

@@ -638,7 +638,8 @@ class acfe_field_advanced_link extends acf_field{
         
         // load field
         $field = acf_get_field($options['field_key']);
-        if(!$field){
+
+        if(!is_array($field) or empty($field['type'])){
             return false;
         }
         

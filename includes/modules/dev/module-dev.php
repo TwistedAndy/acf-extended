@@ -658,7 +658,7 @@ class acfe_dev{
             $field = acf_get_field($field_key);
     
             // check clone in sub field: field_123456abcdef_field_123456abcfed
-            if(!$field && substr_count($field_key, 'field_') > 1){
+            if(!is_array($field) && substr_count($field_key, 'field_') > 1){
                 
                 // get field key (last key)
                 $_field_key = substr($field_key, strrpos($field_key, 'field_'));
@@ -669,7 +669,7 @@ class acfe_dev{
             }
             
             // found field
-            if($field){
+            if(is_array($field) and !empty($field['type'])){
                 
                 // Field type
                 $field_type = acf_get_field_type($field['type']);

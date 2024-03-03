@@ -117,7 +117,7 @@ function acfe_get_meta($post_id = false){
         $field = acf_get_field($field_key);
         
         // Check clone in sub field: field_123456abcdef_field_123456abcfed
-        if(!$field && substr_count($field_key, 'field_') > 1){
+        if(!is_array($field) && substr_count($field_key, 'field_') > 1){
             
             // get field key (last key)
             $_field_key = substr($field_key, strrpos($field_key, 'field_'));
@@ -264,7 +264,7 @@ function acfe_get_orphan_meta($post_id = 0){
                 $clone = acf_get_field($_clone_key);
         
                 // check type & add to collection
-                if(acf_maybe_get($clone, 'type') === 'clone'){
+                if(is_array($clone) and acf_maybe_get($clone, 'type') === 'clone'){
                     $clones[] = $clone;
                 }
         

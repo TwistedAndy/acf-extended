@@ -374,28 +374,29 @@ class acfe_dynamic_forms_helpers{
                 $field = false;
                 
                 // Field key
-                if(strpos($field_key, 'field_') === 0){
-                    
-                    $field = acf_get_field($field_key);
-                    
-                    // Field name
-                }else{
-                    
-                    if(!empty($mapped_fields)){
-                        
-                        foreach($mapped_fields as $mapped_field){
-                            
-                            if($mapped_field['name'] !== $field_key)
-                                continue;
-                            
-                            $field = $mapped_field;
-                            break;
-                            
-                        }
-                        
-                    }
-                    
-                }
+	            if (strpos($field_key, 'field_') === 0) {
+
+		            $field = acf_get_field($field_key);
+
+		            // Field name
+	            } else {
+
+		            if (!empty($mapped_fields)) {
+
+			            foreach ($mapped_fields as $mapped_field) {
+
+				            if ($mapped_field['name'] !== $field_key) {
+					            continue;
+				            }
+
+				            $field = $mapped_field;
+				            break;
+
+			            }
+
+		            }
+
+	            }
                 
                 if(!$field){
                     
@@ -507,12 +508,13 @@ class acfe_dynamic_forms_helpers{
             
             if(!acf_is_field_key($field_key))
                 continue;
-            
-            $field = acf_get_field($field_key);
-            
-            // bypass _validate_email (honeypot)
-            if(!$field || !isset($field['name']) || $field['name'] === '_validate_email')
-                continue;
+
+	        $field = acf_get_field($field_key);
+
+	        // bypass _validate_email (honeypot)
+	        if (!is_array($field) or !isset($field['name']) or $field['name'] === '_validate_email') {
+		        continue;
+	        }
             
             $data[] = array(
                 'label' => $field['label'],

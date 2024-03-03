@@ -196,39 +196,40 @@ class acfe_field_flexible_content_async{
     /**
      * ajax_layout_model
      */
-    function ajax_layout_model(){
-        
-        // options
-        $options = acf_parse_args($_POST, array(
-            'field_key' => '',
-            'layout'    => '',
-        ));
-        
-        $field = acf_get_field($options['field_key']);
-        if(!$field){
-            die;
-        }
-    
-        $acfe_instance = acf_get_instance('acfe_field_flexible_content');
-        $field = acf_prepare_field($field);
-        
-        foreach($field['layouts'] as $k => $layout){
-            
-            if($layout['name'] !== $options['layout']){
-                continue;
-            }
-    
-            $acfe_instance->render_layout($field, $layout, 'acfcloneindex', array());
-            die;
-            
-        }
-        
-        die;
-        
-    }
-    
+	function ajax_layout_model() {
+
+		// options
+		$options = acf_parse_args($_POST, [
+			'field_key' => '',
+			'layout' => '',
+		]);
+
+		$field = acf_get_field($options['field_key']);
+
+		if (!is_array($field) or empty($field['type'])) {
+			exit();
+		}
+
+		$acfe_instance = acf_get_instance('acfe_field_flexible_content');
+		$field = acf_prepare_field($field);
+
+		foreach ($field['layouts'] as $k => $layout) {
+
+			if ($layout['name'] !== $options['layout']) {
+				continue;
+			}
+
+			$acfe_instance->render_layout($field, $layout, 'acfcloneindex', []);
+			exit();
+
+		}
+
+		exit();
+
+	}
+
 }
 
-acf_new_instance('acfe_field_flexible_content_async');
+	acf_new_instance('acfe_field_flexible_content_async');
 
 endif;

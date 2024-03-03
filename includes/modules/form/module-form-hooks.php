@@ -201,10 +201,12 @@ class acfe_dynamic_forms_hooks{
             $return .= "<br/>\n- ";
             
             foreach($sub_fields as $key => $val){
-                
-                $sub_field = acf_get_field($key);
-                
-                if(!$sub_field) continue;
+
+	            $sub_field = acf_get_field($key);
+
+	            if (!is_array($sub_field)) {
+		            continue;
+	            }
                 
                 // Label
                 $label = !empty($sub_field['label']) ? $sub_field['label'] : $sub_field['name'];
