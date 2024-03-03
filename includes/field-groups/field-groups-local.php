@@ -80,9 +80,9 @@ class ACFE_Field_Groups_Local {
 
 		$views['acfe-local'] = sprintf('<a %s href="%s">%s <span class="count">(%s)</span></a>', ($this->view === 'acfe-local' ? 'class="current"' : ''), esc_url(admin_url('edit.php?post_type=acf-field-group&post_status=acfe-local')), esc_html(__('Local', 'acf')), $count);
 
-		if ($this->view === 'acfe-local') {
-
-			global $wp_list_table;
+		global $wp_list_table;
+		
+		if ($this->view === 'acfe-local' and is_object($wp_list_table)) {
 
 			$wp_list_table->set_pagination_args([
 				'total_items' => $count,

@@ -160,9 +160,7 @@ class acfe_third_party {
 
 			}
 
-			$field_groups = array_values($field_groups);
-
-			return $field_groups;
+			return array_values($field_groups);
 
 		}, 25);
 

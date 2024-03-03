@@ -208,7 +208,7 @@ function acfe_form_get_action($name = false, $key = false) {
 		$return = end($actions);
 	}
 
-	if ($key !== false || is_numeric($key)) {
+	if ($key !== false && is_numeric($key)) {
 		$return = acf_maybe_get($return, $key, false);
 	}
 

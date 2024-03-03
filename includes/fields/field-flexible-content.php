@@ -193,9 +193,7 @@ class acfe_field_flexible_content extends acfe_field_extend {
 			}
 		}
 
-		$field = apply_filters('acfe/flexible/validate_field', $field);
-
-		return $field;
+		return apply_filters('acfe/flexible/validate_field', $field);
 
 	}
 
@@ -209,22 +207,13 @@ class acfe_field_flexible_content extends acfe_field_extend {
 	 */
 	function prepare_field($field) {
 
-		// Vars
-		$name = $field['_name'];
-		$key = $field['key'];
-
 		foreach ($field['layouts'] as &$layout) {
 
-			// Vars
-			$l_name = $layout['name'];
-
 			// Prepend
-			$prepend = '';
-			$prepend = apply_filters("acfe/flexible/layouts/label_prepend", $prepend, $layout, $field);
+			$prepend = apply_filters("acfe/flexible/layouts/label_prepend", '', $layout, $field);
 
 			// Atts
-			$atts = [];
-			$atts = apply_filters("acfe/flexible/layouts/label_atts", $atts, $layout, $field);
+			$atts = apply_filters("acfe/flexible/layouts/label_atts", [], $layout, $field);
 
 			// Label
 			$layout['label'] = $prepend . '<span ' . acf_esc_atts($atts) . '>' . $layout['label'] . '</span>';
@@ -270,9 +259,7 @@ class acfe_field_flexible_content extends acfe_field_extend {
 	 */
 	function field_wrapper_attributes($wrapper, $field) {
 
-		$wrapper = apply_filters('acfe/flexible/wrapper_attributes', $wrapper, $field);
-
-		return $wrapper;
+		return apply_filters('acfe/flexible/wrapper_attributes', $wrapper, $field);
 
 	}
 
@@ -284,10 +271,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 	 */
 	function render_field($field) {
 
-		// Vars
-		$name = $field['_name'];
-		$key = $field['key'];
-
 		// defaults
 		if (empty($field['button_label'])) {
 			$field['button_label'] = __('Add Row', 'acf');
@@ -296,7 +279,7 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		// sort layouts into names
 		$layouts = [];
 
-		foreach ($field['layouts'] as $k => $layout) {
+		foreach ($field['layouts'] as $layout) {
 			$layouts[$layout['name']] = $layout;
 		}
 
@@ -333,9 +316,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 
 			<div class="clones">
 				<?php foreach ($layouts as $layout):
-
-					// Vars
-					$l_name = $layout['name'];
 
 					// Models
 					$model = false;
@@ -473,9 +453,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		// vars
 		$id = ($i === 'acfcloneindex') ? 'acfcloneindex' : "row-$i";
 		$prefix = $field['name'] . '[' . $id . ']';
-		$name = $field['_name'];
-		$key = $field['key'];
-		$l_name = $layout['name'];
 
 		// div
 		$div = [
@@ -499,10 +476,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		];
 
 		$handle = apply_filters("acfe/flexible/layouts/handle", $handle, $layout, $field, $i, $value, $prefix);
-
-		// remove row
-		// This makes Flexible Content in ACFE Form buggy in a Flexible Content Preview
-		//reset_rows();
 
 		?>
 		<div <?php echo acf_esc_atts($div); ?>>
@@ -606,7 +579,6 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		]);
 
 		// vars
-		$_title = $layout['label'];
 		$title = $layout['label'];
 
 		// filters
@@ -636,10 +608,9 @@ class acfe_field_flexible_content extends acfe_field_extend {
 
 		// prepend order
 		$order = is_numeric($i) ? $i + 1 : 0;
-		$title = '<span class="acf-fc-layout-order">' . $order . '</span> <span ' . acf_esc_atts($attrs) . '>' . acf_esc_html($title) . '</span>';
 
 		// return
-		return $title;
+		return '<span class="acf-fc-layout-order">' . $order . '</span> <span ' . acf_esc_atts($attrs) . '>' . acf_esc_html($title) . '</span>';
 
 	}
 

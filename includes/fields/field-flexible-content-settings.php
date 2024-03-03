@@ -193,7 +193,7 @@ class acfe_field_flexible_content_settings {
 		}
 
 		// Loop
-		foreach ($field['layouts'] as $i => $layout) {
+		foreach ($field['layouts'] as $layout) {
 
 			$field_groups = acf_maybe_get($layout, 'acfe_flexible_settings', []);
 			$field_groups = acf_get_array($field_groups);

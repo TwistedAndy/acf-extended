@@ -210,13 +210,9 @@ class acfe_field_taxonomy_terms extends acf_field {
 
 		}
 
-		// vars
-		$response = [
+		return [
 			'results' => $results
 		];
-
-		// return
-		return $response;
 
 	}
 
@@ -330,13 +326,10 @@ class acfe_field_taxonomy_terms extends acf_field {
 
 		}
 
-		// vars
-		$response = [
+		// return
+		return [
 			'results' => $results
 		];
-
-		// return
-		return $response;
 
 	}
 
@@ -844,11 +837,9 @@ class acfe_field_taxonomy_terms extends acf_field {
 
 				$terms = $this->filter_terms($all_terms, $field);
 
-				foreach ($terms as $taxonomy => $term) {
+				foreach ($terms as $term) {
 					foreach ($term as $term_id => $term_name) {
-
 						$field['choices'][$term_id] = $term_name;
-
 					}
 				}
 
@@ -863,7 +854,7 @@ class acfe_field_taxonomy_terms extends acf_field {
 
 				$found = false;
 
-				foreach ($field['choices'] as $taxonomy => $term) {
+				foreach ($field['choices'] as $term) {
 					if (isset($term[$v])) {
 						$found = true;
 						break;
@@ -1176,10 +1167,7 @@ class acfe_field_taxonomy_terms extends acf_field {
 			return $choices;
 		}
 
-		// add to choices
-		$choices = $this->filter_terms($all_terms, $field);
-
-		return $choices;
+		return $this->filter_terms($all_terms, $field);
 
 	}
 
@@ -1199,9 +1187,7 @@ class acfe_field_taxonomy_terms extends acf_field {
 			$terms = wp_list_pluck($all_terms, 'term_id');
 			$terms = array_unique($terms);
 
-			$choices = $this->convert_terms_to_choices($terms, $field);
-
-			return $choices;
+			return $this->convert_terms_to_choices($terms, $field);
 
 		}
 
@@ -1232,10 +1218,13 @@ class acfe_field_taxonomy_terms extends acf_field {
 		} else {
 
 			// Add term level
-			foreach ($all_terms as $term_id => &$_term) {
+			foreach ($all_terms as $term_id => $_term) {
 
 				$level = acfe_get_term_level($_term->term_id, $_term->taxonomy);
+
 				$_term->level = $level;
+
+				$all_terms[$term_id] = $_term;
 
 			}
 
@@ -1363,9 +1352,7 @@ class acfe_field_taxonomy_terms extends acf_field {
 
 		$terms = array_unique($terms);
 
-		$choices = $this->convert_terms_to_choices($terms, $field);
-
-		return $choices;
+		return $this->convert_terms_to_choices($terms, $field);
 
 	}
 
@@ -1414,7 +1401,7 @@ class acfe_field_taxonomy_terms extends acf_field {
 		$key = $field['key'];
 		$post_id = acfe_get_post_id();
 
-		foreach ($choices as $taxonomy => &$terms) {
+		foreach ($choices as &$terms) {
 
 			foreach ($terms as $term_id => &$text) {
 

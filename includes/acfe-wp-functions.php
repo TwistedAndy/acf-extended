@@ -181,7 +181,7 @@ function acfe_remove_filter($tag = '', $function = '', $priority = 10) {
 				unset($callbacks[$priority][$filter_id]);
 
 				// and if it was the only filter in that priority, unset that priority
-				if (empty($callbacks[$priority])) {
+				if (isset($callbacks[$priority])) {
 					unset($callbacks[$priority]);
 				}
 
@@ -223,11 +223,13 @@ function acfe_remove_action($tag = '', $function = '', $priority = 10) {
 /**
  * acfe_replace_filter
  *
- * @param $tag
- * @param $function_to_remove
- * @param $function_to_add
- * @param $priority
- * @param $accepted_args
+ * @param string $tag
+ * @param string $function_to_remove
+ * @param string $function_to_add
+ * @param int    $priority
+ * @param int    $accepted_args
+ *
+ * @return bool
  */
 function acfe_replace_filter($tag = '', $function_to_remove = '', $function_to_add = '', $priority = 10, $accepted_args = 1) {
 

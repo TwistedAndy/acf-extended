@@ -159,7 +159,6 @@ class acfe_location_post_type_list {
 	function render_meta_box($post_type, $metabox) {
 
 		// vars
-		$id = $metabox['id'];
 		$index = $metabox['args']['index'];
 		$total = $metabox['args']['total'];
 		$field_group = $metabox['args']['field_group'];
@@ -239,9 +238,8 @@ class acfe_location_post_type_list {
 		}
 
 		$choices = ['all' => __('All', 'acf')];
-		$choices = array_merge($choices, $pretty_post_types);
 
-		return $choices;
+		return array_merge($choices, $pretty_post_types);
 
 	}
 

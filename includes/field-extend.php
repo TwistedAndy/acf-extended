@@ -223,10 +223,10 @@ class acfe_field_extend {
 	/**
 	 * replace_field_filter
 	 *
-	 * @param $tag
-	 * @param $function_to_add
-	 * @param $priority
-	 * @param $accepted_args
+	 * @param string $tag
+	 * @param string $function_to_replace
+	 * @param int    $priority
+	 * @param int    $accepted_args
 	 */
 	function replace_field_filter($tag = '', $function_to_replace = '', $priority = 10, $accepted_args = 1) {
 

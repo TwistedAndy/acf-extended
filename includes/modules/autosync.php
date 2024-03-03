@@ -525,6 +525,8 @@ class ACFE_AutoSync {
 
 		}
 
+		return true;
+
 	}
 
 
@@ -555,6 +557,8 @@ class ACFE_AutoSync {
 			unset($GLOBALS['acfe_json_original_path']);
 
 		}
+
+		return true;
 
 	}
 

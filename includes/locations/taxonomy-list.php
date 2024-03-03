@@ -159,7 +159,6 @@ class acfe_location_taxonomy_list {
 	function render_meta_box($post_type, $metabox) {
 
 		// vars
-		$id = $metabox['id'];
 		$index = $metabox['args']['index'];
 		$total = $metabox['args']['total'];
 		$field_group = $metabox['args']['field_group'];
@@ -225,9 +224,8 @@ class acfe_location_taxonomy_list {
 	function rule_values($choices) {
 
 		$choices = ['all' => __('All', 'acf')];
-		$choices = array_merge($choices, acf_get_taxonomy_labels());
 
-		return $choices;
+		return array_merge($choices, acf_get_taxonomy_labels());
 
 	}
 

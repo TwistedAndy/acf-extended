@@ -53,19 +53,14 @@
 
 .acf-admin-toolbar i.acf-icon,
 .acf-btn i.acf-icon {
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
     width: 20px;
     height: 20px;
     background-color: currentColor;
     border: none;
     border-radius: 0;
-    -webkit-mask-size: contain;
     mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-position: center;
     mask-position: center;
     text-indent: 500%;
     white-space: nowrap;
@@ -92,7 +87,7 @@ samp {
 
 pre {
     display: block;
-    padding: 9.5px;
+    padding: 10px;
     margin: 0;
     line-height: 1.42857143;
     color: #333;
@@ -161,7 +156,7 @@ code[contenteditable=true] {
 
 .acfe-pre-highlight {
     display: block;
-    padding: 9.5px;
+    padding: 10px;
     margin: 0;
     line-height: 1.42857143;
     color: #333;
@@ -575,20 +570,16 @@ html[dir=rtl] .acf-columns-2 .acf-column-2 {
 
 .acfe-module.acfe-module-posts .column-acfe-load {
     width: 70px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box
 }
 
 .acfe-module.acfe-module-posts .column-acfe-autosync-json,
 .acfe-module.acfe-module-posts .column-acfe-autosync-php {
     width: 90px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box
 }
 
 ul.acfe-module-export-choices {
-    -webkit-column-width: 200px;
-    -moz-column-width: 200px;
     column-width: 200px
 }
 
@@ -739,27 +730,19 @@ ul.acfe-module-export-choices {
 }
 
 .acfe-module.acfe-module-form.acfe-module-post .acf-field[data-name=save_post_terms]>.acf-input {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex
 }
 
 .acfe-module.acfe-module-form.acfe-module-post .acf-field[data-name=save_post_terms]>.acf-input .select2.select2-container {
-    -webkit-box-ordinal-group: 1;
-    -ms-flex-order: 0;
     order: 0;
     width: 83% !important
 }
 
 .acfe-module.acfe-module-form.acfe-module-post .acf-field[data-name=save_post_terms]>.acf-input .related-message {
-    -webkit-box-ordinal-group: 2;
-    -ms-flex-order: 1;
     order: 1
 }
 
 .acfe-module.acfe-module-form.acfe-module-post .acf-field[data-name=save_post_terms]>.acf-input .acf-input.append-terms {
-    -webkit-box-ordinal-group: 3;
-    -ms-flex-order: 2;
     order: 2;
     margin-top: 3px;
     width: 17%;
@@ -812,16 +795,12 @@ ul.acfe-module-export-choices {
 }
 
 #acfe-admin-settings .inside>.acf-field>.acf-input {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     float: none;
     padding: 0
 }
 
 #acfe-admin-settings .inside>.acf-field>.acf-input>div {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 50%;
     flex: 1 1 50%;
     max-width: 50%;
     padding: 8px;
@@ -834,7 +813,6 @@ ul.acfe-module-export-choices {
 
 #acfe-admin-settings .inside>.acf-field>.acf-input .acfe-settings-text {
     overflow: hidden;
-    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%;

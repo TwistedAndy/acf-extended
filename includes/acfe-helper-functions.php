@@ -233,9 +233,10 @@ function acfe_ends_with($haystack, $needle) {
  *
  * Prefix array keys recursively ignoring numeric keys
  *
- * @param $array
- * @param $prefix
- * @param $ignore
+ * @param array  $array
+ * @param string $prefix
+ * @param array  $ignore
+ * @param bool   $recursive
  *
  * @return array
  */

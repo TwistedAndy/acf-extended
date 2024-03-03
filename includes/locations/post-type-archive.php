@@ -315,9 +315,8 @@ class acfe_location_post_type_archive {
 		}
 
 		$choices = ['all' => __('All', 'acf')];
-		$choices = array_merge($choices, $pretty_post_types);
 
-		return $choices;
+		return array_merge($choices, $pretty_post_types);
 
 	}
 

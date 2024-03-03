@@ -63,8 +63,6 @@ class acfe_field_repeater extends acfe_field_extend {
 		// lock sortable
 		$lock = false;
 		$lock = apply_filters("acfe/repeater/lock", $lock, $field);
-		$lock = apply_filters("acfe/repeater/lock/name={$field['_name']}", $lock, $field);
-		$lock = apply_filters("acfe/repeater/lock/key={$field['key']}", $lock, $field);
 
 		if ($lock) {
 			$wrapper['data-acfe-repeater-lock'] = 1;
@@ -73,8 +71,6 @@ class acfe_field_repeater extends acfe_field_extend {
 		// remove actions
 		$remove = false;
 		$remove = apply_filters("acfe/repeater/remove_actions", $remove, $field);
-		$remove = apply_filters("acfe/repeater/remove_actions/name={$field['_name']}", $remove, $field);
-		$remove = apply_filters("acfe/repeater/remove_actions/key={$field['key']}", $remove, $field);
 
 		if ($remove) {
 			$wrapper['data-acfe-repeater-remove-actions'] = 1;

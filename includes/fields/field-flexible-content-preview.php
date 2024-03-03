@@ -166,10 +166,6 @@ class acfe_field_flexible_content_preview {
 			return;
 		}
 
-		// vars
-		$name = $flexible['name'];
-		$key = $flexible['key'];
-		$l_name = $layout['name'];
 		$prepend = acfe_get_setting('theme_folder') ? trailingslashit(acfe_get_setting('theme_folder')) : '';
 
 		// Title
@@ -241,10 +237,6 @@ class acfe_field_flexible_content_preview {
 		}
 
 		// vars
-		$name = $field['_name'];
-		$key = $field['key'];
-
-		// vars
 		global $is_preview;
 		$is_preview = true;
 
@@ -304,7 +296,6 @@ class acfe_field_flexible_content_preview {
 		}
 
 		// Vars
-		$name = $field['_name'];
 		$key = $field['key'];
 		$l_name = $layout['name'];
 
@@ -398,9 +389,6 @@ class acfe_field_flexible_content_preview {
 
 		// Vars
 		$is_preview = true;
-		$name = $field['_name'];
-		$key = $field['key'];
-		$l_name = $layout['name'];
 		$post_id = "{$options['field_key']}_{$options['i']}";
 
 		// Prepare values

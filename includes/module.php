@@ -123,17 +123,11 @@ class acfe_module {
 		// process alias
 		foreach ($this->alias as $k => $alias) {
 			if (!empty($item[$alias])) {
-
-				// set 'page_title' = 'label'
 				$item[$k] = $item[$alias];
-
 			}
 		}
 
-		// filters
-		$item = $this->apply_module_filters('acfe/module/validate_item', $item);
-
-		return $item;
+		return $this->apply_module_filters('acfe/module/validate_item', $item);
 
 	}
 
@@ -483,10 +477,8 @@ class acfe_module {
 			return false;
 		}
 
-		// validate item
-		$item = $this->validate_item($item);
+		return $this->validate_item($item);
 
-		return $item;
 	}
 
 
@@ -521,11 +513,7 @@ class acfe_module {
 			'label' => $post->post_title,
 		]);
 
-		// validate item
-		$item = $this->validate_item($item);
-
-		// return
-		return $item;
+		return $this->validate_item($item);
 
 	}
 
@@ -648,11 +636,7 @@ class acfe_module {
 			acf_disable_filter('local');
 		}
 
-		// filters
-		$items = $this->apply_module_filters('acfe/module/load_items', $items);
-
-		// return
-		return $items;
+		return $this->apply_module_filters('acfe/module/load_items', $items);
 
 	}
 
@@ -769,10 +753,7 @@ class acfe_module {
 		// remove alias keys
 		acf_extract_vars($item, $this->alias);
 
-		// filters
-		$item = $this->apply_module_filters('acfe/module/prepare_item_for_export', $item);
-
-		return $item;
+		return $this->apply_module_filters('acfe/module/prepare_item_for_export', $item);
 
 	}
 
@@ -797,10 +778,7 @@ class acfe_module {
 			}
 		}
 
-		// filters
-		$item = $this->apply_module_filters('acfe/module/prepare_item_for_import', $item);
-
-		return $item;
+		return $this->apply_module_filters('acfe/module/prepare_item_for_import', $item);
 
 	}
 

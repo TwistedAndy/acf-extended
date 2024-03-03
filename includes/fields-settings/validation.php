@@ -454,7 +454,7 @@ class acfe_field_validation {
 
 			$rule_match = true;
 
-			foreach ($rule['acfe_validate_rules_and'] as $k => $function) {
+			foreach ($rule['acfe_validate_rules_and'] as $function) {
 
 				if (!$rule_match) {
 					break;

@@ -167,9 +167,6 @@ class acfe_field_flexible_content_async {
 		$id = 'acfcloneindex';
 		$value = [];
 		$prefix = $field['name'] . '[' . $id . ']';
-		$name = $field['_name'];
-		$key = $field['key'];
-		$l_name = $layout['name'];
 
 		$div = [
 			'class' => 'layout acf-clone',
@@ -206,7 +203,7 @@ class acfe_field_flexible_content_async {
 		$acfe_instance = acf_get_instance('acfe_field_flexible_content');
 		$field = acf_prepare_field($field);
 
-		foreach ($field['layouts'] as $k => $layout) {
+		foreach ($field['layouts'] as $layout) {
 
 			if ($layout['name'] !== $options['layout']) {
 				continue;

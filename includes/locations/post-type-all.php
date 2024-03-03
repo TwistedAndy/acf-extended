@@ -26,9 +26,7 @@ class acfe_location_post_type_all {
 	 */
 	function rule_values($choices) {
 
-		$choices = array_merge(['all' => __('All', 'acf')], $choices);
-
-		return $choices;
+		return array_merge(['all' => __('All', 'acf')], $choices);
 
 	}
 

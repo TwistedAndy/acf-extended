@@ -30,7 +30,7 @@ class ACFE_Field_Group {
 	function get_field_types($groups) {
 
 		// sort fields
-		foreach ($groups as $group => &$fields) {
+		foreach ($groups as &$fields) {
 			asort($fields);
 		}
 
@@ -119,7 +119,7 @@ class ACFE_Field_Group {
 		global $field_group;
 
 		// setting
-		$has_enhanced_ui = acfe_get_setting('modules/field_group_ui') ? true : false;
+		$has_enhanced_ui = (bool) acfe_get_setting('modules/field_group_ui');
 
 		// display title
 		if (!$has_enhanced_ui) {
@@ -134,7 +134,7 @@ class ACFE_Field_Group {
 				'placeholder' => '',
 				'prepend' => '',
 				'append' => ''
-			], 'div', 'label', true);
+			], 'div', 'label');
 
 		}
 
@@ -291,7 +291,7 @@ class ACFE_Field_Group {
 					'choices' => acfe_get_roles(),
 					'value' => acf_maybe_get($field_group, 'acfe_permissions', []),
 					'layout' => 'vertical'
-				], 'div', 'label', true);
+				], 'div', 'label');
 
 			}
 
@@ -438,10 +438,7 @@ class ACFE_Field_Group {
 			$field_group['acfe_autosync'] = $acfe_autosync;
 		}
 
-		// filter
-		$field_group = apply_filters('acfe/default_field_group', $field_group);
-
-		return $field_group;
+		return apply_filters('acfe/default_field_group', $field_group);
 
 	}
 

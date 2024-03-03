@@ -121,7 +121,7 @@ class acfe_field_group_hide_on_screen {
 
 			$response['style'] = '';
 
-			foreach ($field_groups as $i => $field_group) {
+			foreach ($field_groups as $field_group) {
 
 				// merge styles instead of using only the first field group rules
 				$response['style'] .= acf_get_field_group_style($field_group);

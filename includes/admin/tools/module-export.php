@@ -378,7 +378,7 @@ class acfe_module_export extends ACF_Admin_Tool {
 	/**
 	 * submit
 	 *
-	 * @return ACF_Admin_Notice|n|void
+	 * @return ACF_Admin_Notice|void
 	 */
 	function submit() {
 

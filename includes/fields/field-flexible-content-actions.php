@@ -236,7 +236,7 @@ class acfe_field_flexible_content_actions {
 		$actions = $field['acfe_flexible_add_actions'];
 
 		// loop layouts
-		foreach ($field['layouts'] as $i => $layout) {
+		foreach ($field['layouts'] as $layout) {
 
 			// Title
 			if (in_array('title', $actions)) {
@@ -557,7 +557,7 @@ class acfe_field_flexible_content_actions {
 
 		$models = [];
 
-		foreach ($field['layouts'] as $layout_key => $layout) {
+		foreach ($field['layouts'] as $layout) {
 
 			$models[$layout['name']] = [
 				'key' => $layout['key'],
@@ -583,10 +583,7 @@ class acfe_field_flexible_content_actions {
 
 		}
 
-		// reassign keys
-		$value = array_values($value);
-
-		return $value;
+		return array_values($value);
 
 	}
 

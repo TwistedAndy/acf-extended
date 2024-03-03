@@ -57,7 +57,7 @@ class acfe_field_group_advanced {
 			'wrapper' => [
 				'data-after' => 'active'
 			]
-		], 'div', 'label', true);
+		], 'div', 'label');
 
 	}
 

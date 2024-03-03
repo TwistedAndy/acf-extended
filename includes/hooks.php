@@ -98,7 +98,6 @@ class acfe_hooks {
 		}
 
 		// vars
-		$id = $data['id'];
 		$type = $data['type'];
 		$object = $data['object'];
 		$hooks = $data['hooks'];
@@ -185,7 +184,6 @@ class acfe_hooks {
 			}
 
 			// vars
-			$id = $data['id'];
 			$type = $data['type'];
 			$object = $data['object'];
 			$hooks = $data['hooks'];
@@ -527,9 +525,7 @@ class acfe_hooks {
 			return $fields;
 		}
 
-		$fields = apply_filters('acfe/load_fields', $fields, $parent);
-
-		return $fields;
+		return apply_filters('acfe/load_fields', $fields, $parent);
 
 	}
 

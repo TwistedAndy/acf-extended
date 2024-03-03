@@ -191,11 +191,6 @@ class acfe_field_flexible_content_controls {
 	 */
 	function prepare_layout($layout, $field, $i, $value, $prefix) {
 
-		// Vars
-		$name = $field['_name'];
-		$key = $field['key'];
-		$l_name = $layout['name'];
-
 		// Default
 		$icons = [
 			'add' => '<a class="acf-icon -plus small light acf-js-tooltip" href="#" data-name="add-layout" title="' . __('Add layout', 'acf') . '"></a>',

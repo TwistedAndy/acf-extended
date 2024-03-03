@@ -185,11 +185,7 @@ function acfe_delete_orphan_meta($post_id = 0, $confirm = true) {
 		'normal' => $deleted,
 	];
 
-	// filters
-	$return = apply_filters('acfe/delete_orphan_meta', $return, $post_id, $confirm);
-
-	// return
-	return $return;
+	return apply_filters('acfe/delete_orphan_meta', $return, $post_id, $confirm);
 
 }
 
@@ -385,10 +381,7 @@ function acfe_get_orphan_meta($post_id = 0) {
 
 		// field is not allowed
 		if (!$is_allowed_field && !$is_allowed_field_group) {
-
 			$orphan[] = $row;
-			continue;
-
 		}
 
 	}

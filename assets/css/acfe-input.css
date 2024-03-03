@@ -242,12 +242,8 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
 }
 
 .acf-fields.acfe-column-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    -ms-flex-line-pack: start;
     align-content: flex-start
 }
 
@@ -260,7 +256,6 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
 }
 
 .acf-fields.acfe-column-wrapper>.acf-field.acf-field-acfe-column {
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0;
     border-top-width: 0
@@ -412,7 +407,6 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
     padding: 0;
     border-color: #7e8993 !important;
     border-radius: 4px;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     background: #fff
 }
@@ -654,21 +648,17 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
     cursor: pointer !important;
     border-width: 1px !important;
     border-style: solid !important;
-    -webkit-appearance: none;
     border-radius: 3px;
     font-weight: 400 !important;
     white-space: nowrap;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: #0071a1 !important;
     border-color: #0071a1 !important;
     background: #f3f5f6 !important;
     vertical-align: top;
-    -webkit-box-shadow: none !important;
     box-shadow: none !important;
     outline: 0 !important;
     opacity: unset !important;
-    -webkit-filter: unset !important;
     filter: unset !important
 }
 
@@ -772,13 +762,10 @@ body.-loading * {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     border-color: #ccd0d4;
     color: #23282d;
     border-radius: 100px;
-    -webkit-box-shadow: none;
     box-shadow: none;
     background: #fff;
     width: 30px;
@@ -797,14 +784,11 @@ body:not(.acf-admin-5-3) .layout>.acfe-fc-placeholder>a {
 }
 
 .layout>.acfe-fc-placeholder>a:active {
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%)
 }
 
 .layout>.acfe-fc-placeholder>a:focus {
     border-color: #ccc;
-    -webkit-box-shadow: none;
     box-shadow: none
 }
 
@@ -849,8 +833,6 @@ body:not(.acf-admin-5-3) .layout>.acfe-fc-placeholder>a span {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     margin: 0;
     z-index: 10000
@@ -862,8 +844,6 @@ body:not(.acf-admin-5-3) .layout>.acfe-fc-placeholder>a span {
     height: 100%;
     padding: 0;
     background-color: rgba(255, 255, 255, 0);
-    -webkit-transition: background-color .2s linear;
-    -o-transition: background-color .2s linear;
     transition: background-color .2s linear
 }
 
@@ -916,8 +896,6 @@ body:not(.acf-admin-5-3) .layout>.acfe-fc-placeholder>a span {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: #ccc;
     font-size: 110px
@@ -1368,7 +1346,6 @@ form.acfe-form.is-invalid[data-errors-position=below] .acf-field .acf-notice {
 .acf-media-modal .ui-helper-hidden-accessible {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
-    -webkit-clip-path: inset(50%);
     clip-path: inset(50%);
     height: 1px;
     margin: -1px;

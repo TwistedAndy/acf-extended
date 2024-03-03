@@ -29,7 +29,7 @@ function acfe_get_post_id_field_groups($post_id = 0) {
 
 	// check post id is attachment
 	if ($type === 'post' && get_post_type($id) === 'attachment') {
-		$post_id = "attachment_{$id}";
+		$post_id = 'attachment_' . $id;
 	}
 
 	// override attachment
@@ -321,7 +321,7 @@ function acfe_get_locations_array($locations) {
 
 	$rules = [];
 
-	foreach ($types as $key => $type) {
+	foreach ($types as $type) {
 
 		foreach ($type as $slug => $name) {
 

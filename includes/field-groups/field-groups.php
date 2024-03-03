@@ -446,7 +446,7 @@ class ACFE_Field_Groups {
 			$path = apply_filters("acfe/settings/php_save/ID={$field_group['ID']}", $path, $field_group);
 			$path = apply_filters("acfe/settings/php_save/key={$field_group['key']}", $path, $field_group);
 
-			$found = (bool) is_dir($path) && wp_is_writable($path);
+			$found = is_dir($path) && wp_is_writable($path);
 
 			$folder = $this->get_human_readable_file_location($path, $found, false);
 
@@ -621,7 +621,7 @@ class ACFE_Field_Groups {
 			$path = apply_filters("acfe/settings/json_save/ID={$field_group['ID']}", $path, $field_group);
 			$path = apply_filters("acfe/settings/json_save/key={$field_group['key']}", $path, $field_group);
 
-			$found = (bool) is_dir($path) && wp_is_writable($path);
+			$found = is_dir($path) && wp_is_writable($path);
 
 			$folder = $this->get_human_readable_file_location($path, $found, false);
 

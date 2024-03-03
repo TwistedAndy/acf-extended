@@ -658,6 +658,10 @@ class acfe_field_advanced_link extends acf_field {
 			$args['s'] = $s;
 			$is_search = true;
 
+		} else {
+
+			$s = '';
+
 		}
 
 		// post_type
@@ -707,7 +711,7 @@ class acfe_field_advanced_link extends acf_field {
 			$label = acf_get_post_type_label($post_type);
 			$label = "{$label} Archive";
 
-			if ($is_search && stripos($label, $s) === false) {
+			if ($is_search and stripos($label, $s) === false) {
 				continue;
 			}
 
@@ -767,14 +771,11 @@ class acfe_field_advanced_link extends acf_field {
 			$results = $results[0]['children'];
 		}
 
-		// vars
-		$response = [
+		// return
+		return [
 			'results' => $results,
 			'limit' => $args['posts_per_page'],
 		];
-
-		// return
-		return $response;
 
 	}
 

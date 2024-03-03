@@ -82,7 +82,7 @@ class acfe_field_groups_local_export extends ACF_Admin_Tool {
 					// Search database for existing field group.
 					$post = acf_get_field_group_post($field_group['key']);
 
-					if ($post) {
+					if (is_object($post) and $post instanceof WP_Post) {
 						$field_group['ID'] = $post->ID;
 					}
 

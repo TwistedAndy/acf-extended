@@ -27,7 +27,6 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
     .wrap:not(#poststuff) form[action="options-permalink.php"] p.submit,
     .wrap:not(#poststuff) form[action="options.php"] .edit-tag-actions,
     .wrap:not(#poststuff) form[action="options.php"] p.submit {
-        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         position: absolute;
         top: 37px;
@@ -39,7 +38,6 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
         text-align: right;
         border: 1px solid #ccd0d4;
         border-radius: 0;
-        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
         box-shadow: 0 1px 1px rgba(0, 0, 0, .04)
     }
 
@@ -53,7 +51,6 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
     .wrap:not(#poststuff) form[action="options-permalink.php"] p.submit::before,
     .wrap:not(#poststuff) form[action="options.php"] .edit-tag-actions::before,
     .wrap:not(#poststuff) form[action="options.php"] p.submit::before {
-        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         content: "";
         background: #fff;
@@ -344,14 +341,12 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
 
 .wrap form#createuser select#ure_select_other_roles+.ms-parent .ms-choice,
 .wrap form#your-profile select#ure_select_other_roles+.ms-parent .ms-choice {
-    -webkit-box-shadow: 0 0 0 transparent;
     box-shadow: 0 0 0 transparent;
     border-radius: 3px;
     border: 1px solid #7e8993;
     color: #32373c;
     padding: 4px 8px;
     margin: 0;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-size: 14px;
     line-height: 2.1;
@@ -539,7 +534,6 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
     width: 20%;
     padding: 0 12px;
     float: left;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
     font-size: 13px;
@@ -550,7 +544,6 @@ body:not(.taxonomy-product_cat):not(.woocommerce-page) .wrap {
 .wrap #term-translations>.icl_subsubsub {
     position: relative;
     width: 20%;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0 12px;
     float: left

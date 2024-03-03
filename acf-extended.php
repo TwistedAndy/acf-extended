@@ -101,8 +101,8 @@ if (!class_exists('ACFE')):
 
 				// php
 				'php' => true,
-				'php_save' => "{$theme_path}/acfe-php",
-				'php_load' => ["{$theme_path}/acfe-php"],
+				'php_save' => $theme_path . '/acfe-php',
+				'php_load' => [$theme_path . '/acfe-php'],
 				'php_found' => false,
 
 				// json
@@ -340,11 +340,11 @@ if (!class_exists('ACFE')):
 			foreach ($array as $name => $value) {
 
 				// acf_update_setting
-				acf_update_setting("acfe/{$name}", $value);
+				acf_update_setting('acfe/' . $name, $value);
 
 				// acf_get_setting
-				add_filter("acf/settings/acfe/{$name}", function($value) use ($name) {
-					return apply_filters("acfe/settings/{$name}", $value);
+				add_filter('acf/settings/acfe/' . $name, function($value) use ($name) {
+					return apply_filters('acfe/settings/' . $name, $value);
 				}, 5);
 
 			}

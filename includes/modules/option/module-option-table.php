@@ -68,10 +68,7 @@ class ACFE_Admin_Options_List extends WP_List_Table {
 
 		}
 
-
-		$result = $wpdb->get_results($sql, 'ARRAY_A');
-
-		return $result;
+		return $wpdb->get_results($sql, 'ARRAY_A');
 
 	}
 

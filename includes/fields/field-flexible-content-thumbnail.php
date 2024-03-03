@@ -144,14 +144,9 @@ class acfe_field_flexible_content_thumbnail {
 			return $field;
 		}
 
-		// Vars
-		$name = $field['name'];
-		$key = $field['key'];
-
 		foreach ($field['layouts'] as &$layout) {
 
 			// Vars
-			$l_name = $layout['name'];
 			$thumbnail = $layout['acfe_flexible_thumbnail'];
 
 			// Flexible Thumbnails
@@ -240,9 +235,7 @@ class acfe_field_flexible_content_thumbnail {
 			$prepend['class'] .= ' acfe-flexible-layout-thumbnail-not-found';
 		}
 
-		$prepend = '<div ' . acf_esc_atts($prepend) . '></div>';
-
-		return $prepend;
+		return '<div ' . acf_esc_atts($prepend) . '></div>';
 
 	}
 
@@ -259,9 +252,7 @@ class acfe_field_flexible_content_thumbnail {
 	 */
 	function layout_title($title, $field, $layout, $i) {
 
-		$title = preg_replace('#<div class="acfe-flexible-layout-thumbnail(.*?)</div>#', '', $title);
-
-		return $title;
+		return preg_replace('#<div class="acfe-flexible-layout-thumbnail(.*?)</div>#', '', $title);
 
 	}
 
