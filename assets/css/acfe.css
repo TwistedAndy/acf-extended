@@ -1,5 +1,5 @@
 body.acfe-modal-opened {
-    overflow: hidden
+    overflow: hidden;
 }
 
 body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.media-modal.wp-core-ui:not(.acf-media-modal)::before {
@@ -11,7 +11,7 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000
+    z-index: 10000;
 }
 
 .acfe-modal-overlay {
@@ -23,12 +23,12 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
     bottom: 0;
     height: 100%;
     width: 100%;
-    z-index: 100000
+    z-index: 100000;
 }
 
 .acfe-modal {
     display: none;
-    transition: all .3s ease-in-out
+    transition: all .3s ease-in-out;
 }
 
 .acfe-modal.-open {
@@ -40,25 +40,21 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
     left: 0;
     bottom: 0;
     right: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    pointer-events: none
+    pointer-events: none;
 }
 
 .acfe-modal.-open .acfe-modal-footer,
 .acfe-modal.-open .acfe-modal-footer *,
 .acfe-modal.-open .acfe-modal-title,
 .acfe-modal.-open .acfe-modal-title * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .acfe-modal.-open>.acfe-modal-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     width: calc(100vw - 60px);
@@ -258,11 +254,7 @@ body.block-editor-page.acfe-modal-opened .edit-post-sidebar__panel-tabs {
 }
 
 body.block-editor-page .edit-post-layout .acfe-modal.-open {
-    -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: start;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
     align-items: start;
     background: rgba(0, 0, 0, .7)
 }
@@ -401,8 +393,6 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
     border-top: 0;
     border-bottom: 0;
     background: #fff;
-    -webkit-transition: color .1s ease-in-out, background .1s ease-in-out;
-    -o-transition: color .1s ease-in-out, background .1s ease-in-out;
     transition: color .1s ease-in-out, background .1s ease-in-out;
     padding: 7px 15px;
     border-color: #ddd
@@ -488,15 +478,14 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a.disabled:focus {
-    -webkit-box-shadow: none;
     box-shadow: none;
-    outline: 0
+    outline: 0;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a span {
     display: inline-block;
     font-size: 16px;
-    font-weight: 600
+    font-weight: 600;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a span.badge.acf-js-tooltip {
@@ -530,7 +519,7 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-3 ul li {
     flex: 0 0 33.333333%;
-    max-width: 33.333333%
+    max-width: 33.333333%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-4 ul li {
@@ -540,12 +529,12 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-5 ul li {
     flex: 0 0 20%;
-    max-width: 20%
+    max-width: 20%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-6 ul li {
     flex: 0 0 16.66%;
-    max-width: 16.66%
+    max-width: 16.66%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-flex-thumbnails ul li a {
@@ -560,16 +549,16 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 @media only screen and (max-width:960px) {
     .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li {
         flex: 0 0 50% !important;
-        max-width: 50% !important
+        max-width: 50% !important;
     }
 
     .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-1 ul li {
         flex: 0 0 100% !important;
-        max-width: 100% !important
+        max-width: 100% !important;
     }
 
     .acfe-modal.-open .acfe-modal-content ul li a {
-        padding: 7px
+        padding: 7px;
     }
 }
 

@@ -104,12 +104,8 @@ body .medium-editor-toolbar {
 
 .acf-fields.-left>.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style:not([data-acfe-clone-modal="1"])>.acf-input,
 .acf-fields.-left>.acf-field-clone.acfe-field-clone-layout-table.acfe-seamless-style:not([data-acfe-clone-modal="1"])>.acf-input {
-    padding: 0;
-    padding-left: 1px;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    margin-left: 0;
-    margin-right: 0
+    padding: 0 0 0 1px;
+    margin: -15px 0;
 }
 
 .acf-postbox.seamless>.acf-fields>.acf-field-clone.acfe-field-clone-layout-block.acfe-seamless-style>.acf-input,
@@ -158,18 +154,12 @@ td[data-acfe-clone-modal="1"]>.acf-input>.acfe-modal>.acfe-modal-wrapper>.acfe-m
 
 tr.acf-field.acf-field-clone.acfe-seamless-style>td.acf-input>.acf-fields {
     border: 0;
-    margin-left: -10px;
-    margin-right: -10px;
-    margin-top: -15px;
-    margin-bottom: -15px
+    margin: -15px -10px;
 }
 
 tr.acf-field.acf-field-clone.acfe-seamless-style.acfe-field-clone-layout-table>td.acf-input {
     padding: 0;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    margin-left: 0;
-    margin-right: 0
+    margin: -15px 0;
 }
 
 tr.acf-field.acf-field-clone.acfe-seamless-style.acfe-field-clone-layout-table>td.acf-input>.acf-table {
@@ -384,22 +374,13 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
 }
 
 .acf-repeater .acf-row.ui-sortable-helper>td.acf-row-handle {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center
 }
 
 .acf-postbox.seamless>.inside.acfe-column-wrapper {
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
     display: flex !important;
-    -ms-flex-wrap: wrap !important;
     flex-wrap: wrap !important
 }
 
@@ -431,8 +412,7 @@ body:not(.acf-admin-5-3) .acf-field-acfe-code-editor>.acf-input>.acf-input-wrap>
 
 .acf-ui-datepicker .ui-datepicker table {
     font-size: 13px;
-    margin: 0;
-    margin-bottom: 7px
+    margin: 0 0 7px;
 }
 
 .acf-ui-datepicker .ui-datepicker .ui-datepicker-header {
@@ -1183,18 +1163,12 @@ td[data-acfe-group-modal="1"]>.acf-input>.acfe-modal>.acfe-modal-wrapper>.acfe-m
 
 tr.acf-field.acf-field-group.acfe-seamless-style>td.acf-input>.acf-fields {
     border: 0;
-    margin-left: -10px;
-    margin-right: -10px;
-    margin-top: -15px;
-    margin-bottom: -15px
+    margin: -15px -10px;
 }
 
 tr.acf-field.acf-field-group.acfe-seamless-style.acfe-field-group-layout-table>td.acf-input {
     padding: 0;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    margin-left: 0;
-    margin-right: 0
+    margin: -15px 0;
 }
 
 tr.acf-field.acf-field-group.acfe-seamless-style.acfe-field-group-layout-table>td.acf-input>.acf-table {

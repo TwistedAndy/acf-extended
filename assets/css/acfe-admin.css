@@ -113,15 +113,10 @@ pre>code {
 }
 
 code {
-    -webkit-user-select: all;
-    -moz-user-select: all;
     user-select: all
 }
 
 code[contenteditable=true] {
-    -webkit-user-select: auto;
-    -moz-user-select: auto;
-    -ms-user-select: auto;
     user-select: auto
 }
 
@@ -378,8 +373,6 @@ html[dir=rtl] .acf-columns-2 .acf-column-2 {
 
 .postbox#acfe-acf-custom-fields>.inside .wp-list-table tbody tr,
 .postbox#acfe-wp-custom-fields>.inside .wp-list-table tbody tr {
-    -webkit-transition: background-color .5s linear;
-    -o-transition: background-color .5s linear;
     transition: background-color .5s linear
 }
 
@@ -444,10 +437,7 @@ html[dir=rtl] .acf-columns-2 .acf-column-2 {
 
     .postbox#acfe-acf-custom-fields tbody tr,
     .postbox#acfe-wp-custom-fields tbody tr {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -ms-flex-wrap: wrap;
         flex-wrap: wrap
     }
 
@@ -460,8 +450,6 @@ html[dir=rtl] .acf-columns-2 .acf-column-2 {
 
     .postbox#acfe-acf-custom-fields tbody td:first-of-type,
     .postbox#acfe-wp-custom-fields tbody td:first-of-type {
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
         flex: 1
     }
 
@@ -503,8 +491,6 @@ html[dir=rtl] .acf-columns-2 .acf-column-2 {
 
     .postbox#acfe-acf-custom-fields tbody td:nth-child(3),
     .postbox#acfe-wp-custom-fields tbody td:nth-child(3) {
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 100%;
         flex: 1 1 100%
     }
 }
@@ -781,8 +767,6 @@ ul.acfe-module-export-choices {
 }
 
 #acfe-admin-settings .inside>.acf-field {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     padding: 0
 }
