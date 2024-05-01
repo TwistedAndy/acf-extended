@@ -224,6 +224,30 @@ class acfe_module_acf {
 
 
 	/**
+	 * pre_format_value
+	 *
+	 * acf/pre_format_value:10
+	 *
+	 * @param $null
+	 * @param $value
+	 * @param $post_id
+	 * @param $field
+	 *
+	 * @return false|mixed
+	 */
+	function pre_format_value($null, $value, $post_id, $field) {
+
+		// do not format value for wysiwyg fields
+		if ($field['type'] === 'wysiwyg') {
+			return $value;
+		}
+
+		return $null;
+
+	}
+
+
+	/**
 	 * save_post
 	 *
 	 * acf/save_post:1
@@ -251,8 +275,13 @@ class acfe_module_acf {
 			'label' => acf_maybe_get_POST('post_title'),
 		];
 
+		add_filter('acf/pre_format_value', [$this, 'pre_format_value'], 10, 4);
+
 		// alias of get_fields
 		$fields = get_field_objects();
+
+		remove_filter('acf/pre_format_value', [$this, 'pre_format_value']);
+
 		$meta = [];
 
 		// bail early

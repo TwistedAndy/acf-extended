@@ -86,8 +86,14 @@ class acfe_field_groups_local_export extends ACF_Admin_Tool {
 						$field_group['ID'] = $post->ID;
 					}
 
+					// remove inline callbacks
+					add_filter('acf/prepare_field_for_import', [$this, 'prepare_field_for_import'], 20);
+
 					// Import field group.
 					$field_group = acf_import_field_group($field_group);
+
+					// reset filter
+					remove_filter('acf/prepare_field_for_import', [$this, 'prepare_field_for_import'], 20);
 
 					// append message
 					$ids[] = $field_group['ID'];
@@ -107,6 +113,35 @@ class acfe_field_groups_local_export extends ACF_Admin_Tool {
 
 	}
 
+
+	/**
+	 * prepare_field_for_import
+	 *
+	 * @param $field
+	 *
+	 * @return mixed
+	 */
+	function prepare_field_for_import($field) {
+
+		// remove inline callback during import
+		unset($field['callback']);
+
+		// dyanmic render
+		if ($field['type'] === 'acfe_dynamic_render') {
+			unset($field['render']);
+		}
+
+		// return
+		return $field;
+
+	}
+
+
+	/**
+	 * html
+	 *
+	 * @return void
+	 */
 	function html() {
 
 		if ($this->is_active()) {

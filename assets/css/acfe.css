@@ -55,18 +55,19 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
 }
 
 .acfe-modal.-open>.acfe-modal-wrapper {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
     display: flex;
     flex-direction: column;
     width: calc(100vw - 60px);
     max-width: 1100px;
     max-height: calc(100vh - 60px);
-    position: relative
+    position: relative;
 }
 
 .acfe-modal.-open.acfe-modal-sub>.acfe-modal-wrapper>.acfe-modal-content,
 .acfe-modal.-open.acfe-modal-sub>.acfe-modal-wrapper>.acfe-modal-footer,
 .acfe-modal.-open.acfe-modal-sub>.acfe-modal-wrapper>.acfe-modal-title {
-    pointer-events: none
+    pointer-events: none;
 }
 
 .acfe-modal.-open.acfe-modal-sub>.acfe-modal-wrapper::before {
@@ -76,7 +77,7 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
     background: rgba(0, 0, 0, .7);
     height: 100%;
     width: 100%;
-    pointer-events: none
+    pointer-events: none;
 }
 
 .acfe-modal.-open .acfe-modal-title {
@@ -173,43 +174,43 @@ body.acfe-modal-opened.wp-admin.upload-php>div:not([style*="display: none;"])>.m
     position: relative;
     text-align: right;
     border-top: 1px solid #ddd;
-    pointer-events: auto
+    pointer-events: auto;
 }
 
 .acfe-modal.-open.-small>.acfe-modal-wrapper {
-    max-width: 450px
+    max-width: 450px;
 }
 
 .acfe-modal.-open.-medium>.acfe-modal-wrapper {
-    max-width: 700px
+    max-width: 700px;
 }
 
 .acfe-modal.-open.-large>.acfe-modal-wrapper {
-    max-width: 1100px
+    max-width: 1100px;
 }
 
 .acfe-modal.-open.-xlarge>.acfe-modal-wrapper {
-    max-width: 1400px
+    max-width: 1400px;
 }
 
 .acfe-modal.-open.-full>.acfe-modal-wrapper {
     max-width: 100%;
-    flex: 1
+    flex: 1;
 }
 
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields,
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields>.acf-field-clone,
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields>.acf-field-clone>.acf-input,
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields>.acf-field-clone>.acf-input>.acf-clone-fields.acf-fields.-left {
-    height: 100%
+    height: 100%;
 }
 
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields>.acf-field-clone {
-    padding: 0
+    padding: 0;
 }
 
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields>.acf-field-clone>.acf-input {
-    margin: 0
+    margin: 0;
 }
 
 .acfe-modal.-open.-full>.acfe-modal-wrapper>.acfe-modal-content>.acf-fields.-left::before,
@@ -422,20 +423,20 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container,
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container {
     width: 100%;
     padding: 14px;
     margin-right: auto;
-    margin-left: auto
+    margin-left: auto;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul {
     margin: 0 -7px;
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li {
@@ -478,8 +479,9 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a.disabled:focus {
+    -webkit-box-shadow: none;
     box-shadow: none;
-    outline: 0;
+    outline: 0
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a span {
@@ -494,27 +496,27 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
     margin-left: 2px;
     line-height: 1.2;
     font-size: 0;
-    float: right
+    float: right;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li a span.badge.acf-js-tooltip::before {
-    font-size: 16px
+    font-size: 16px;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul::after {
     content: "";
     clear: both;
-    display: table
+    display: table;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-1 ul li {
     flex: 0 0 100%;
-    max-width: 100%
+    max-width: 100%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-2 ul li {
     flex: 0 0 50%;
-    max-width: 50%
+    max-width: 50%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-3 ul li {
@@ -524,7 +526,7 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-4 ul li {
     flex: 0 0 25%;
-    max-width: 25%
+    max-width: 25%;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-5 ul li {
@@ -534,31 +536,31 @@ body.block-editor-page.is-fullscreen-mode .edit-post-layout.is-sidebar-opened .a
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-6 ul li {
     flex: 0 0 16.66%;
-    max-width: 16.66%;
+    max-width: 16.66%
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-flex-thumbnails ul li a {
-    text-align: center
+    text-align: center;
 }
 
 .acfe-modal.-open .acfe-modal-content .acfe-flexible-categories~.acfe-flex-container {
     overflow: auto;
-    height: calc(100% - 39px)
+    height: calc(100% - 39px);
 }
 
 @media only screen and (max-width:960px) {
     .acfe-modal.-open .acfe-modal-content .acfe-flex-container ul li {
         flex: 0 0 50% !important;
-        max-width: 50% !important;
+        max-width: 50% !important
     }
 
     .acfe-modal.-open .acfe-modal-content .acfe-flex-container.acfe-col-1 ul li {
         flex: 0 0 100% !important;
-        max-width: 100% !important;
+        max-width: 100% !important
     }
 
     .acfe-modal.-open .acfe-modal-content ul li a {
-        padding: 7px;
+        padding: 7px
     }
 }
 

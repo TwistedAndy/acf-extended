@@ -159,15 +159,6 @@ class acfe_field_advanced_link extends acf_field {
 			],
 		];
 
-		// value
-		$sub_fields[] = [
-			'name' => 'value',
-			'key' => 'value',
-			'label' => '',
-			'type' => 'acfe_hidden',
-			'required' => false,
-		];
-
 		// url
 		$sub_fields[] = [
 			'name' => 'url',
@@ -429,6 +420,10 @@ class acfe_field_advanced_link extends acf_field {
 		// compatibility with string
 		if (is_string($value)) {
 			$value = ['value' => $value];
+		}
+
+		if ($value['type'] === 'url' && !empty($value['value'])) {
+			$value['url'] = $value['value'];
 		}
 
 		// defaults

@@ -13,14 +13,25 @@ class acfe_field_data {
 
 	}
 
+
+	/**
+	 * render_field_settings
+	 *
+	 * @param $field
+	 *
+	 * @return void
+	 */
 	function render_field_settings($field) {
 
+		// get field ID
 		$id = acf_maybe_get($field, 'ID');
 
+		// validate
 		if (!$id || $id === 'acfcloneindex') {
 			return;
 		}
 
+		// render data button
 		acf_render_field_setting($field, [
 			'label' => false,
 			'instructions' => '',
@@ -33,6 +44,14 @@ class acfe_field_data {
 
 	}
 
+
+	/**
+	 * render_field
+	 *
+	 * @param $field
+	 *
+	 * @return void
+	 */
 	function render_field($field) {
 
 		if (!is_array($field) or empty($field['value'])) {
@@ -43,30 +62,13 @@ class acfe_field_data {
 
 		// Field
 		$field = acf_get_field($id);
-
-		if (!is_array($field) or empty($field['type'])) {
-			return;
-		}
-
-		$field = array_map(function($value) {
-
-			if (is_array($value)) return $value;
-
-			return esc_html($value);
-
-		}, $field);
+		$field = @map_deep($field, 'esc_html');
 
 		$field_debug = $field ? '<pre>' . print_r($field, true) . '</pre>' : '<pre>' . __('Field data unavailable', 'acfe') . '</pre>';
 
 		// Post
 		$post = get_post($id, ARRAY_A);
-		$post = array_map(function($value) {
-
-			if (is_array($value)) return $value;
-
-			return esc_html($value);
-
-		}, $post);
+		$post = @map_deep($post, 'esc_html');
 
 		$post_debug = $post ? '<pre style="margin-top:15px;">' . print_r($post, true) . '</pre>' : '<pre>' . __('Post object unavailable', 'acfe') . '</pre>';
 

@@ -147,11 +147,12 @@ class acfe_field_group_meta {
 
 		}
 
-		$raw_field_group = get_post($field_group['ID']);
+		// esc field group
+		$field_group = @map_deep($field_group, 'esc_html');
 
-		// try to unserialize post content
-		$raw_field_group->post_content = maybe_unserialize($raw_field_group->post_content);
-		$raw_field_group->post_content = @map_deep($raw_field_group->post_content, '_wp_specialchars');
+		// get raw field group
+		$raw_field_group = get_post($field_group['ID']);
+		$raw_field_group = @map_deep($raw_field_group, 'esc_html');
 
 		?>
 		<a href="#" class="acf-button button" data-modal><?php _e('Data', 'acfe'); ?></a>

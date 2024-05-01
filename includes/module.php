@@ -47,6 +47,7 @@ class acfe_module {
 		$this->add_module_action('acfe/module/untrashed_item', [$this, 'untrashed_item'], 9);
 		$this->add_module_action('acfe/module/deleted_item', [$this, 'deleted_item'], 9);
 		$this->add_module_action('acfe/module/imported_item', [$this, 'imported_item'], 9);
+		$this->add_module_filter('acfe/module/validate_item', [$this, 'validate_item'], 9);
 		$this->add_module_filter('acfe/module/load_item', [$this, 'load_item'], 9);
 		$this->add_module_filter('acfe/module/load_items', [$this, 'load_items'], 9);
 

@@ -8,42 +8,29 @@ if (!defined('ABSPATH')) {
  * acfe_get_pretty_forms
  *
  * Similar to acf_get_pretty_post_types() but for ACFE Forms
+ * Used in the Forms field type
  *
  * @param array $forms
  *
  * @return array
  */
-function acfe_get_pretty_forms($forms = []) {
+function acfe_get_pretty_forms($allowed = []) {
 
-	if (empty($forms)) {
+	$forms = acfe_get_module('form')->get_items();
+	$choices = [];
 
-		$forms = get_posts([
-			'post_type' => 'acfe-form',
-			'posts_per_page' => -1,
-			'fields' => 'ids',
-			'orderby' => 'title',
-			'order' => 'ASC',
-		]);
+	foreach ($forms as $item) {
 
-	}
+		// fallback to name if empty title
+		$item['title'] = !empty($item['title']) ? $item['title'] : $item['name'];
 
-	$return = [];
-
-	// Choices
-	if (!empty($forms)) {
-
-		foreach ($forms as $form_id) {
-
-			$form_name = get_the_title($form_id);
-
-			// todo: use form name instead of ID
-			$return[$form_id] = $form_name;
-
+		if (empty($allowed) || in_array($item['name'], $allowed, true)) {
+			$choices[$item['name']] = $item['title'];
 		}
 
 	}
 
-	return $return;
+	return $choices;
 
 }
 
@@ -149,20 +136,18 @@ function acfe_form_is_submitted($form_name = false) {
  */
 function acfe_form_unique_action_id($form, $type) {
 
-	$name = $form['name'] . '-' . $type;
-
+	// global
 	global $acfe_form_uniqid;
-
 	$acfe_form_uniqid = acf_get_array($acfe_form_uniqid);
 
+	$name = "{$form['name']}-{$type}";
+
 	if (!isset($acfe_form_uniqid[$type])) {
-
 		$acfe_form_uniqid[$type] = 1;
-
 	}
 
 	if ($acfe_form_uniqid[$type] > 1) {
-		$name = $name . '-' . $acfe_form_uniqid[$type];
+		$name = "{$name}-{$acfe_form_uniqid[ $type ]}";
 	}
 
 	$acfe_form_uniqid[$type]++;
@@ -176,10 +161,16 @@ function acfe_form_unique_action_id($form, $type) {
  *
  * Retrieve all actions output
  *
- * @return mixed
+ * @return array|false|string[]
  */
 function acfe_form_get_actions() {
-	return get_query_var('acfe_form_actions', []);
+
+	// get actions
+	$actions = acf_get_form_data('acfe/form/actions');
+	$actions = acf_get_array($actions);
+
+	// return
+	return $actions;
 }
 
 /**
@@ -194,22 +185,24 @@ function acfe_form_get_actions() {
  */
 function acfe_form_get_action($name = false, $key = false) {
 
+	// get actions
 	$actions = acfe_form_get_actions();
 
-	// No action
+	// no action
 	if (empty($actions)) {
 		return false;
 	}
 
-	// Action name
+	// get last action
+	$return = end($actions);
+
+	// get by action name
 	if (!empty($name)) {
 		$return = acf_maybe_get($actions, $name, false);
-	} else {
-		$return = end($actions);
 	}
 
-	if ($key !== false && is_numeric($key)) {
-		$return = acf_maybe_get($return, $key, false);
+	if ($return && !acf_is_empty($key)) {
+		$return = acfe_array_get($return, $key);
 	}
 
 	return $return;
@@ -247,5 +240,89 @@ function acfe_form_is_front() {
 	_deprecated_function('ACF Extended: acfe_form_is_front()', '0.8.8', "acfe_is_front()");
 
 	return acfe_is_front();
+
+}
+
+/**
+ * acfe_import_form
+ *
+ * @param $args
+ *
+ * @return array|mixed|WP_Error
+ */
+function acfe_import_form($args) {
+
+	// json string
+	if (is_string($args)) {
+		$args = json_decode($args, true);
+	}
+
+	// validate array
+	if (!is_array($args) || empty($args)) {
+		return new WP_Error('acfe_import_form_invalid_input', __("Input is invalid: Must be a json string or an array."));
+	}
+
+	// module
+	$module = acfe_get_module('form');
+
+	/**
+	 * single item
+	 *
+	 * array(
+	 *     'title' => 'My Form',
+	 *     'acfe_form_name' => 'my-form',
+	 *     'acfe_form_actions' => array(...)
+	 * )
+	 */
+	if (isset($args['title'])) {
+
+		$args = [
+			$args
+		];
+
+	}
+
+	// vars
+	$result = [];
+
+	// loop
+	foreach ($args as $key => $item) {
+
+		// prior 0.9
+		// old import had name as key
+		if (!is_numeric($key) && !isset($item['name'])) {
+			$item['name'] = $key;
+		}
+
+		// name still missing
+		// retrieve from old key acfe_form_name
+		if (!isset($item['name'])) {
+			$item['name'] = acf_maybe_get($item, 'acfe_form_name');
+		}
+
+		// search database for existing item
+		$post = $module->get_item_post($item['name']);
+		if ($post) {
+			$item['ID'] = $post->ID;
+		}
+
+		// import item
+		$item = $module->import_item($item);
+
+		$return = [
+			'success' => true,
+			'post_id' => $item['ID'],
+			'message' => 'Form "' . get_the_title($item['ID']) . '" successfully imported.',
+		];
+
+		$result[] = $return;
+
+	}
+
+	if (count($result) === 1) {
+		$result = $result[0];
+	}
+
+	return $result;
 
 }

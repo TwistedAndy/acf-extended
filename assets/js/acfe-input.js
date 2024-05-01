@@ -1979,21 +1979,31 @@
 			layouts: $layout[0].outerHTML
 		});
 
-		// Append Temp Input
-		var $input = $('<input type="text" style="clip:rect(0,0,0,0);clip-path:none;position:absolute;" value="" />').appendTo($('body'));
-		$input.attr('value', data).select();
+		navigator.clipboard.writeText(data).then(function() {
 
-		// alert
-		if (document.execCommand('copy')) {
 			alert(acf.__('Layout data has been copied to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'));
+			return true;
 
-			// prompt
-		} else {
-			prompt(acf.__('Please copy the following layout(s) data to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'), data);
-		}
+		}).catch(function() {
 
-		// Remove the temp input
-		$input.remove();
+			// append Temp Input
+			var $input = $('<input type="text" style="clip:rect(0,0,0,0);clip-path:none;position:absolute;" value="" />').appendTo($('body'));
+			$input.attr('value', data).select();
+
+			// alert
+			if (document.execCommand('copy')) {
+				alert(acf.__('Layout data has been copied to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'));
+
+				// prompt
+			} else {
+				prompt(acf.__('Please copy the following layout(s) data to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'), data);
+			}
+
+			// remove the temp input
+			$input.remove();
+
+		});
+
 
 	};
 
@@ -2019,21 +2029,30 @@
 			layouts: $layouts.html()
 		});
 
-		// Append Temp Input
-		var $input = $('<input type="text" style="clip:rect(0,0,0,0);clip-path:none;position:absolute;" value="" />').appendTo(flexible.$el);
-		$input.attr('value', data).select();
+		navigator.clipboard.writeText(data).then(function() {
 
-		// alert
-		if (document.execCommand('copy')) {
 			alert(acf.__('Layouts data have been copied to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'));
+			return true;
 
-			// prompt
-		} else {
-			prompt(acf.__('Please copy the following layout(s) data to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'), data);
-		}
+		}).catch(function() {
 
+			// append Temp Input
+			var $input = $('<input type="text" style="clip:rect(0,0,0,0);clip-path:none;position:absolute;" value="" />').appendTo(flexible.$el);
+			$input.attr('value', data).select();
 
-		$input.remove();
+			// alert
+			if (document.execCommand('copy')) {
+				alert(acf.__('Layouts data have been copied to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'));
+
+				// prompt
+			} else {
+				prompt(acf.__('Please copy the following layout(s) data to your clipboard.') + '\n' + acf.__('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.'), data);
+			}
+
+			// remove the temp input
+			$input.remove();
+
+		});
 
 	};
 
@@ -2659,15 +2678,8 @@
 
 		onAppend: function($el) {
 
-			// acf block type "align" attribute pass a react element
-			// with acf.doAction('append', this.state.$el))
-			// which return a fake jQuery element and break $el.is('...') check
-			if (acf.isset($el, 0, '$$typeof')) {
-				return;
-			}
-
-			// validate
-			if ($el.is('.layout')) {
+			// check element is a jQuery object with .layout class
+			if ($el?.[0]?.classList?.contains('layout')) {
 
 				// get field
 				var field = acf.getClosestField($el);
@@ -4156,28 +4168,35 @@
 	new acf.Model({
 
 		actions: {
+			'append_field/type=wysiwyg': 'appendField',
 			'show_field/type=wysiwyg': 'showField',
 			'ready_field/type=wysiwyg': 'showField'
 		},
 
+		appendField: function(field) {
+
+			// initialize editor when inside flexible content > repeater
+			// on click repeater add row
+			this.setTimeout(function() {
+				this.showField(field);
+			}, 1);
+
+		},
+
 		showField: function(field) {
 
-			if (!field.has('acfeWysiwygAutoInit') || !field.$el.is(':visible') || field.has('id') || acfe.isFilterEnabled('acfeFlexibleOpen')) {
-				return;
+			if (field.has('acfeWysiwygAutoInit') && field.$el.is(':visible') && !field.has('id') && !acfe.isFilterEnabled('acfeFlexibleOpen')) {
+				this.initializeEditor(field);
 			}
-
-			this.initializeEditor(field);
 
 		},
 
 		initializeEditor: function(field) {
 
-			var $wrap = field.$control();
+			if (field.$control().hasClass('delay')) {
 
-			if ($wrap.hasClass('delay')) {
-
-				$wrap.removeClass('delay');
-				$wrap.find('.acf-editor-toolbar').remove();
+				field.$control().removeClass('delay');
+				field.$control().find('.acf-editor-toolbar').remove();
 
 				// initialize
 				field.initializeEditor();
@@ -4485,9 +4504,22 @@
 		// - this field is used to setup the conditional logic events
 		var field = target.getField(rule.field);
 
-		// ACF Extended: Check in all form if targeted field not found
+		// acfe
+		// found target, but not the field to check value against
 		if (target && !field) {
-			field = acf.getField(rule.field);
+
+			// find the field in the whole page
+			// we must add this step because acf.getField('do_not_exists') will still instantiate the field
+			var findField = acf.findField(rule.field);
+
+			// find field
+			if (findField.length) {
+
+				//instatiate field once found
+				field = acf.getField(rule.field);
+
+			}
+
 		}
 
 		// bail ealry if no target or no field (possible if field doesn't exist due to HTML error)

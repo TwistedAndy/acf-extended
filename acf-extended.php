@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Advanced Custom Fields: Extended
  * Description: All-in-one enhancement suite that improves WordPress & Advanced Custom Fields.
- * Version:     0.9.0
+ * Version:     0.9.0.2.1
  * Author:      ACF Extended
  * Plugin URI:  https://www.acf-extended.com
  * Author URI:  https://www.acf-extended.com
@@ -19,7 +19,7 @@ if (!class_exists('ACFE')):
 	class ACFE {
 
 		// vars
-		var $version = '0.9.0';
+		var $version = '0.9.0.2';
 
 		/**
 		 * construct
@@ -95,9 +95,9 @@ if (!class_exists('ACFE')):
 				'theme_path' => $theme_path,
 				'theme_url' => $theme_url,
 				'theme_folder' => parse_url($theme_url, PHP_URL_PATH),
-				'reserved_post_types' => ['acf-field', 'acf-field-group', 'acfe-form'],
+				'reserved_post_types' => ['acf-field', 'acf-field-group'],
 				'reserved_taxonomies' => ['acf-field-group-category'],
-				'reserved_field_groups' => ['group_acfe_dynamic_form'],
+				'reserved_field_groups' => [],
 
 				// php
 				'php' => true,
@@ -241,9 +241,6 @@ if (!class_exists('ACFE')):
 			acfe_include('includes/modules/ui/module-ui-settings.php');
 			acfe_include('includes/modules/ui/module-ui-term.php');
 			acfe_include('includes/modules/ui/module-ui-user.php');
-
-			// modules legacy
-			acfe_include('includes/module-legacy.php');
 
 		}
 

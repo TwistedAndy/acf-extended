@@ -15,7 +15,7 @@ class acfe_field_forms extends acf_field {
 		$this->label = __('Forms', 'acfe');
 		$this->category = apply_filters('acfe/form_field_type_category', 'relational');
 		$this->defaults = [
-			'post_type' => [],
+			'forms' => [],
 			'field_type' => 'checkbox',
 			'multiple' => 0,
 			'allow_null' => 0,
@@ -475,6 +475,57 @@ class acfe_field_forms extends acf_field {
 
 
 	/**
+	 * load_value
+	 *
+	 * Handle old values which returned form id
+	 * Should return form names now
+	 *
+	 * @param $value
+	 * @param $post_id
+	 * @param $field
+	 *
+	 * @return mixed
+	 */
+	function load_value($value, $post_id, $field) {
+
+		// bail early
+		if (empty($value)) {
+			return $value;
+		}
+
+		// vars
+		$is_array = is_array($value);
+		$value = acf_get_array($value);
+
+		// loop
+		foreach ($value as &$v) {
+
+			if (is_numeric($v)) {
+
+				// get item
+				$item = acfe_get_module('form')->get_item($v);
+
+				// found item by ID
+				// return name
+				if ($item) {
+					$v = $item['name'];
+				}
+
+			}
+
+		}
+
+		// check array
+		if (!$is_array) {
+			$value = acfe_unarray($value);
+		}
+
+		return $value;
+
+	}
+
+
+	/**
 	 * format_value
 	 *
 	 * @param $value
@@ -498,13 +549,13 @@ class acfe_field_forms extends acf_field {
 		foreach ($value as &$v) {
 
 			// get object
-			$object = get_field('acfe_form_name', $v);
+			$object = acfe_get_module('form')->get_item($v);
 
 			if (!$object || is_wp_error($object)) continue;
 
 			// return: name
-			if ($field['return_format'] === 'name') {
-				$v = $object;
+			if ($field['return_format'] === 'id') {
+				$v = $object['ID'];
 			}
 
 		}
