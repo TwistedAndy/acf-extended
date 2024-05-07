@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Advanced Custom Fields: Extended
  * Description: All-in-one enhancement suite that improves WordPress & Advanced Custom Fields.
- * Version:     0.9.0.2.1
+ * Version:     0.9.0.3.1
  * Author:      ACF Extended
  * Plugin URI:  https://www.acf-extended.com
  * Author URI:  https://www.acf-extended.com
@@ -19,7 +19,7 @@ if (!class_exists('ACFE')):
 	class ACFE {
 
 		// vars
-		var $version = '0.9.0.2';
+		var $version = '0.9.0.3';
 
 		/**
 		 * construct
@@ -120,12 +120,12 @@ if (!class_exists('ACFE')):
 				'modules/ui' => true,
 
 				// fields
-				'field/recaptcha/site_key' => null,
-				'field/recaptcha/secret_key' => null,
-				'field/recaptcha/version' => null,
-				'field/recaptcha/v2/theme' => null,
-				'field/recaptcha/v2/size' => null,
-				'field/recaptcha/v3/hide_logo' => null,
+				'field/recaptcha/site_key' => '',
+				'field/recaptcha/secret_key' => '',
+				'field/recaptcha/version' => '',
+				'field/recaptcha/v2/theme' => '',
+				'field/recaptcha/v2/size' => '',
+				'field/recaptcha/v3/hide_logo' => '',
 
 			]);
 

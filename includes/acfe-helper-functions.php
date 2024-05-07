@@ -1229,3 +1229,24 @@ function acfe_unparse_types($v, $filters = ['int', 'bool', 'null']) {
 	return $v;
 
 }
+
+
+/**
+ * acfe_redirect
+ *
+ * @param $location
+ * @param $status
+ *
+ * @return void
+ */
+function acfe_redirect($location, $status = 302) {
+
+	// filter
+	$redirect = apply_filters('acfe/redirect', $location, $status);
+
+	if ($redirect) {
+		wp_redirect($location);
+		exit;
+	}
+
+}
