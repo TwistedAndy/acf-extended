@@ -389,7 +389,7 @@ class acfe_field_flexible_content_preview {
 
 		// Vars
 		$is_preview = true;
-		$post_id = "{$options['field_key']}_{$options['i']}";
+		$post_id = acf_uniqid('acfe/flexible_content/preview');
 
 		// Prepare values
 		$meta = [

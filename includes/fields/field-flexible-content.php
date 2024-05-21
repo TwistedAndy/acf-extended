@@ -35,9 +35,10 @@ class acfe_field_flexible_content extends acfe_field_extend {
 		acf_localize_text([
 			'Layout data has been copied to your clipboard.' => __('Layout data has been copied to your clipboard.', 'acfe'),
 			'Layouts data have been copied to your clipboard.' => __('Layouts data have been copied to your clipboard.', 'acfe'),
-			'Please copy the following layout(s) data to your clipboard.' => __('Please copy the following layout(s) data to your clipboard.', 'acfe'),
+			'Please copy the following data to your clipboard.' => __('Please copy the following data to your clipboard.', 'acfe'),
 			'Please paste previously copied layout data in the following field:' => __('Please paste previously copied layout data in the following field:', 'acfe'),
-			'You can now paste it in the same Flexible Content on another page, using the "Paste" button action.' => __('You can now paste it in the same Flexible Content on another page, using the "Paste" button action.', 'acfe'),
+			'You can now paste it on another page, using the "Paste" button action.' => __('You can now paste it on another page, using the "Paste" button action.', 'acfe'),
+			'You can then paste it on another page, using the "Paste" button action.' => __('You can then paste it on another page, using the "Paste" button action.', 'acfe'),
 		]);
 
 	}
