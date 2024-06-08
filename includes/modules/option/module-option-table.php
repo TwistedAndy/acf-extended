@@ -130,7 +130,7 @@ class ACFE_Admin_Options_List extends WP_List_Table {
 				if (is_object($value) && is_a($value, '__PHP_Incomplete_Class')) {
 					// do nothing
 				} else {
-					$value = @map_deep($value, '_wp_specialchars');
+					$value = map_deep($value, '_wp_specialchars');
 				}
 
 				return '<pre style="max-height:200px; overflow:auto; white-space: pre;">' . print_r($value, true) . '</pre><pre style="max-height:200px; overflow:auto; white-space: pre; margin-top:10px;">' . print_r($raw, true) . '</pre>';

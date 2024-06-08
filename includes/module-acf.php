@@ -405,6 +405,7 @@ class acfe_module_acf {
 					return 1;
 				}
 			}
+			return -1;
 		});
 
 	}

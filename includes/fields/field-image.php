@@ -67,7 +67,14 @@ class acfe_field_image extends acfe_field_extend {
 						'operator' => '==',
 						'value' => 'wp',
 					]
-				]
+				],
+				[
+					[
+						'field' => 'uploader',
+						'operator' => '==',
+						'value' => '',
+					]
+				],
 			];
 
 		}
