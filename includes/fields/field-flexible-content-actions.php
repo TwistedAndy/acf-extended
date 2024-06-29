@@ -67,15 +67,15 @@ class acfe_field_flexible_content_actions {
 		 */
 
 		$choices = [
-			'title' => 'Inline Title Edit',
-			'toggle' => 'Toggle Layout',
-			'copy' => 'Copy/paste Layout',
-			'lock' => 'Lock Layouts',
-			'close' => 'Close Button',
+			'title' => __('Inline Title Edit', 'acfe'),
+			'toggle' => __('Toggle Layout', 'acfe'),
+			'copy' => __('Copy/paste Layout', 'acfe'),
+			'lock' => __('Lock Layouts', 'acfe'),
+			'close' => __('Close Button', 'acfe'),
 		];
 
 		if (acf_version_compare(acf_get_setting('version'), '<', '5.9')) {
-			$choices['clone'] = 'Clone';
+			$choices['clone'] = __('Clone', 'acfe');
 		}
 
 		acf_render_field_setting($field, [
@@ -447,7 +447,7 @@ class acfe_field_flexible_content_actions {
 		if (in_array('toggle', $actions)) {
 
 			$icons = array_merge([
-				'toggle' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-hidden" href="#" title="Toggle layout" data-acfe-flexible-control-toggle="' . $layout['name'] . '"></a>'
+				'toggle' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-hidden" href="#" title="' . esc_attr__('Toggle layout', 'acfe') . '" data-acfe-flexible-control-toggle="' . $layout['name'] . '"></a>'
 			], $icons);
 
 		}
@@ -456,7 +456,7 @@ class acfe_field_flexible_content_actions {
 		if (in_array('copy', $actions)) {
 
 			$icons = array_merge([
-				'copy' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-category" href="#" title="Copy layout" data-acfe-flexible-control-copy="' . $layout['name'] . '"></a>'
+				'copy' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-category" href="#" title="' . esc_attr__('Copy layout', 'acfe') . '" data-acfe-flexible-control-copy="' . $layout['name'] . '"></a>'
 			], $icons);
 
 		}
@@ -465,7 +465,7 @@ class acfe_field_flexible_content_actions {
 		if (in_array('clone', $actions) && acf_version_compare(acf_get_setting('version'), '<', '5.9')) {
 
 			$icons = array_merge($icons, [
-				'clone' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-admin-page" href="#" title="Clone layout" data-acfe-flexible-control-clone="' . $layout['name'] . '"></a>'
+				'clone' => '<a class="acf-icon small light acf-js-tooltip acfe-flexible-icon dashicons dashicons-admin-page" href="#" title="' . esc_attr__('Clone layout', 'acfe') . '" data-acfe-flexible-control-clone="' . $layout['name'] . '"></a>'
 			]);
 
 		}
