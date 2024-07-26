@@ -416,9 +416,6 @@ class ACFE_Field_Group {
 			return $field_group;
 		}
 
-		// default label placement
-		$field_group['label_placement'] = 'left';
-
 		// autoSync
 		$acfe_autosync = [];
 
