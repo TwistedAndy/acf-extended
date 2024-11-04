@@ -273,6 +273,12 @@ function acfe_array_keys_r($array) {
  */
 function acfe_starts_with($haystack, $needle) {
 
+	// make sure $haystack is a string
+	// substr deprecated non-string since php 8.0
+	if (!is_string($haystack)) {
+		return false;
+	}
+
 	$length = strlen($needle);
 	return substr($haystack, 0, $length) === $needle;
 
@@ -294,6 +300,12 @@ function acfe_ends_with($haystack, $needle) {
 
 	if ($length === 0) {
 		return true;
+	}
+
+	// make sure $haystack is a string
+	// substr deprecated non-string since php 8.0
+	if (!is_string($haystack)) {
+		return false;
 	}
 
 	return substr($haystack, -$length) === $needle;

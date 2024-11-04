@@ -43,6 +43,8 @@ class acfe_compatibility {
 	 */
 	function acf_init() {
 
+		add_filter('admin_body_class', [$this, 'admin_body_class']);
+
 		// settings list
 		$settings = [
 			'acfe_php' => 'acfe/php',
@@ -66,6 +68,31 @@ class acfe_compatibility {
 			}
 
 		}
+
+	}
+
+
+	/**
+	 * admin_body_class
+	 *
+	 * Add class to admin body to fix acf postbox cog icon breaking line-height in WP 5.5
+	 *
+	 * @param $classes
+	 *
+	 * @return mixed|string
+	 */
+	function admin_body_class($classes) {
+
+		if (!is_string($classes)) {
+			return $classes;
+		}
+
+		$version = (float) get_bloginfo('version');
+		if (acf_version_compare($version, '>=', '6.5')) {
+			$classes .= ' acfe-fix-postboxes';
+		}
+
+		return $classes;
 
 	}
 

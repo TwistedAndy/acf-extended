@@ -40,14 +40,21 @@ function acfe_is_acf_61() {
  *
  * Includes a file within the plugin
  *
- * @param string $filename
+ * @param $filename
+ * @param $once
+ *
+ * @return false|mixed
  */
-function acfe_include($filename = '') {
+function acfe_include($filename = '', $once = true) {
 
-	$file_path = ACFE_PATH . ltrim($filename, '/');
+	$file_path = acfe_get_path($filename);
 
 	if (file_exists($file_path)) {
-		return include_once($file_path);
+		if ($once) {
+			return include_once($file_path);
+		} else {
+			return include($file_path);
+		}
 	}
 
 	return false;
