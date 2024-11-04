@@ -436,10 +436,6 @@ class acfe_field_flexible_content_preview {
 				add_filter('acf/pre_load_post_id', [$this, 'pre_load_post_id'], 2, 2);
 				add_action('loop_start', [$this, 'loop_start']);
 
-				// update loop for get_row_index
-				$i = (int) $options['i'];
-				acf_update_loop('active', 'i', $i);
-
 				// include template
 				acfe_flexible_render_layout_template($layout, $field);
 
