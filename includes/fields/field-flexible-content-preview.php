@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
 
 class acfe_field_flexible_content_preview {
 
+	public $no_post = false;
+
 	/**
 	 * construct
 	 */
@@ -345,8 +347,6 @@ class acfe_field_flexible_content_preview {
 
 	}
 
-	var $no_post = false;
-
 	/**
 	 * layout_preview
 	 *
@@ -372,8 +372,7 @@ class acfe_field_flexible_content_preview {
 
 		// Load field
 		$field = acf_get_field($options['field_key']);
-
-		if (!is_array($field) or empty($field['type'])) {
+		if (!$field) {
 			return $this->return_or_die();
 		}
 
@@ -389,21 +388,51 @@ class acfe_field_flexible_content_preview {
 		global $is_preview;
 
 		// Vars
+		$i = (int) $options['i'];
+		$field_key = $options['field_key'];
+		$value = wp_unslash($options['value']);
+
 		$is_preview = true;
+
 		$post_id = acf_uniqid('acfe/flexible_content/preview');
 
-		// Prepare values
+		// prepare meta
 		$meta = [
-			$options['field_key'] => [
-				wp_unslash($options['value'])
-			]
+			$field_key => []
 		];
 
+		// if preview index is higher than 0
+		// add empty layouts to mimic get_row_index()
+		if ($i > 0) {
+			for ($j = 0; $j < $i; $j++) {
+				$meta[$field_key][] = [
+					'acf_fc_layout' => $layout['name']
+				];
+			}
+		}
+
+		// append current layout
+		$meta[$field_key][] = $value;
+
+		// setup meta
 		acfe_setup_meta($meta, $post_id, true);
 
-		if (have_rows($options['field_key'])):
-			while (have_rows($options['field_key'])): the_row();
+		if (have_rows($field_key)):
+			while (have_rows($field_key)): the_row();
 
+				// continue to loop until the correct preview index
+				if (acf_get_loop('active', 'i') !== $i) {
+
+					// remove previously created empty layouts
+					// so acf_get_loop('active', 'value') only return one row (current)
+					$loop = acf_get_loop('active');
+					unset($loop['value'][$loop['i']]);
+					acf_update_loop('active', 'value', $loop['value']);
+
+					continue;
+				}
+
+				// global post
 				global $post;
 				if ($this->no_post) {
 					$post = null;
@@ -414,16 +443,15 @@ class acfe_field_flexible_content_preview {
 
 					$post_id = acfe_get_post_id('array');
 
-					// ajax
+					// context:ajax
 					if ($post_id['type'] === 'post') {
 						$post = get_post($post_id['id']);
 
-						// /taxonomy/user page
-					} else {
-
+						// context:taxonomy/user page
 						// assign for next call
 						// this fix the issue where doing new WP_Query() in a taxonomy page
 						// will setup the last $post as global and break next get_field() calls
+					} else {
 						$this->no_post = true;
 					}
 
@@ -504,20 +532,20 @@ class acfe_field_flexible_content_preview {
 	 */
 	function pre_load_post_id($null, $post_id) {
 
-		if (!$post_id) {
-
-			global $post;
-			if ($post) {
-				return null; // let acf find the post id from the $post
-			}
-
-			// taxonomy/user/options page
-			// retrieve the correct post id dynamically
-			return acfe_get_post_id();
-
+		// post id provided
+		if ($post_id) {
+			return $null;
 		}
 
-		return $null;
+		// retrieve global post
+		global $post;
+		if ($post) {
+			return null; // let acf find the post from the $post
+		}
+
+		// retrieve the correct post id dynamically
+		// context:taxonomy/user/options page
+		return acfe_get_post_id();
 
 	}
 
