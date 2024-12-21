@@ -53,15 +53,15 @@ if (!function_exists('get_flexible')) {
 					$is_preview = false;
 				}
 
-				// Actions
-				do_action("acfe/flexible/enqueue", $field, $is_preview);
+				// Render: Global Enqueue
+				acfe_flexible_render_enqueue($field);
 
 			}
 
-			// Render: Enqueue
+			// Render: Layout Enqueue
 			acfe_flexible_render_layout_enqueue($layout, $field);
 
-			// Render: Template
+			// Render: Layout Template
 			acfe_flexible_render_layout_template($layout, $field);
 
 		endwhile;
@@ -179,6 +179,25 @@ function acfe_flexible_render_layout_template($layout, $field) {
 	do_action("acfe/flexible/render/after_template", $field, $layout, $is_preview);
 
 }
+
+
+/**
+ * acfe_flexible_render_enqueue
+ *
+ * Enqueue global scripts & styles for the Flexible Content
+ *
+ * @param $field
+ */
+function acfe_flexible_render_enqueue($field) {
+
+	// global
+	global $is_preview;
+
+	// actions
+	do_action("acfe/flexible/enqueue", $field, $is_preview);
+
+}
+
 
 /**
  * acfe_flexible_render_layout_enqueue

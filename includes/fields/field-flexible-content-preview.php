@@ -242,13 +242,13 @@ class acfe_field_flexible_content_preview {
 		global $is_preview;
 		$is_preview = true;
 
-		// actions
-		do_action("acfe/flexible/enqueue", $field, $is_preview);
+		// render: global enqueue
+		acfe_flexible_render_enqueue($field);
 
-		// loop
+		// loop layouts
 		foreach ($field['layouts'] as $layout) {
 
-			// Enqueue
+			// render: layout enqueue
 			acfe_flexible_render_layout_enqueue($layout, $field);
 
 		}

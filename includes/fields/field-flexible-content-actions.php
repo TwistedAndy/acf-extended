@@ -569,21 +569,33 @@ class acfe_field_flexible_content_actions {
 
 		$value = acf_get_array($value);
 
-		foreach ($value as $k => $layout) {
+		foreach ($value as $k => $row) {
 
-			if (!isset($models[$layout['acf_fc_layout']])) {
+			if (!isset($models[$row['acf_fc_layout']])) {
 				continue;
 			}
 
-			if (!acf_maybe_get($layout, $models[$layout['acf_fc_layout']]['toggle'])) {
+			if (!acf_maybe_get($row, $models[$row['acf_fc_layout']]['toggle'])) {
 				continue;
 			}
 
-			unset($value[$k]);
+			// vars
+			$layout = acf_get_field_type('flexible_content')->get_layout($row['acf_fc_layout'], $field);
+
+			// filters
+			$toggle = true;
+			$toggle = apply_filters("acfe/flexible/toggle_hide", $toggle, $row, $layout, $field);
+
+			if ($toggle) {
+				unset($value[$k]);
+			}
 
 		}
 
-		return array_values($value);
+		// reassign keys
+		$value = array_values($value);
+
+		return $value;
 
 	}
 
