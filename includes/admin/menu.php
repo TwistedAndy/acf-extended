@@ -31,8 +31,6 @@ class acfe_admin_menu {
 				'edit-acf-field-group-category',
 				'edit-acfe-dbt',
 				'acfe-dbt',
-				'edit-acfe-dop',
-				'acfe-dop',
 				'edit-acfe-template',
 				'acfe-template',
 				'edit-acfe-form',
@@ -87,6 +85,7 @@ class acfe_admin_menu {
 			'edit.php?post_type=acf-post-type',
 			'acfe-settings',
 			'edit.php?post_type=acf-taxonomy',
+			'edit.php?post_type=acf-ui-options-page',
 			'acf-tools',
 			'acf-settings-updates',
 		];

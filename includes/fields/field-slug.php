@@ -104,7 +104,7 @@ class acfe_field_slug extends acf_field {
 	function validate_value($valid, $value, $field, $input) {
 
 		// sanitize
-		$value = sanitize_title($value);
+		$value = sanitize_title((string) $value);
 
 		// check max length
 		if ($field['maxlength'] && mb_strlen(wp_unslash($value)) > $field['maxlength']) {
@@ -127,7 +127,7 @@ class acfe_field_slug extends acf_field {
 	 * @return string
 	 */
 	function update_value($value, $post_id, $field) {
-		return sanitize_title($value);
+		return sanitize_title((string) $value);
 	}
 
 
