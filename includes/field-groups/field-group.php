@@ -92,17 +92,23 @@ class ACFE_Field_Group {
 		// display title
 		if (!$this->has_enhanced_ui()) {
 
-			acf_render_field_wrap([
-				'label' => __('Display title', 'acfe'),
-				'instructions' => __('Render this title on edit post screen', 'acfe'),
-				'type' => 'text',
-				'name' => 'acfe_display_title',
-				'prefix' => 'acf_field_group',
-				'value' => acf_maybe_get($field_group, 'acfe_display_title'),
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => ''
-			], 'div', 'label');
+			// pre-ACF 6.6
+			if (!acfe_is_acf_66()) {
+
+				acf_render_field_wrap([
+					'label' => __('Display title', 'acfe'),
+					'instructions' => __('Render this title on edit post screen', 'acfe'),
+					'type' => 'text',
+					'name' => 'acfe_display_title',
+					'prefix' => 'acf_field_group',
+					'value' => acf_maybe_get($field_group, 'acfe_display_title'),
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => ''
+				], 'div', 'label', true);
+
+			}
+
 
 		}
 
@@ -356,7 +362,7 @@ class ACFE_Field_Group {
 			acf_disable_filter('local');
 
 			$wrapper = [
-				'class' => 'acf-js-tooltip',
+				'class' => 'acfe-js-tooltip',
 				'title' => $data['file'],
 			];
 
@@ -415,6 +421,9 @@ class ACFE_Field_Group {
 		if (acf_maybe_get($field_group, 'location')) {
 			return $field_group;
 		}
+
+		// default label placement
+		$field_group['label_placement'] = 'left';
 
 		// autoSync
 		$acfe_autosync = [];

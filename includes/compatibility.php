@@ -17,6 +17,7 @@ class acfe_compatibility {
 		// fields
 		add_filter('acf/validate_field_group', [$this, 'field_group_location_list'], 20);
 		add_filter('acf/validate_field_group', [$this, 'field_group_instruction_tooltip'], 20);
+		add_filter('acf/validate_field_group', [$this, 'field_group_display_title'], 20);
 		add_filter('acf/validate_field', [$this, 'field_acfe_update'], 20);
 		add_filter('acf/validate_field/type=group', [$this, 'field_seamless_style'], 20);
 		add_filter('acf/validate_field/type=clone', [$this, 'field_seamless_style'], 20);
@@ -85,7 +86,7 @@ class acfe_compatibility {
 	/**
 	 * admin_body_class
 	 *
-	 * Add class to admin body to fix acf postbox cog icon breaking line-height in WP 5.5
+	 * Add class to admin body to fix acf postbox cog icon breaking line-height in WP 6.5
 	 *
 	 * @param $classes
 	 *
@@ -154,6 +155,7 @@ class acfe_compatibility {
 
 	}
 
+
 	/**
 	 * field_group_instruction_tooltip
 	 *
@@ -169,6 +171,36 @@ class acfe_compatibility {
 
 		if (acf_maybe_get($field_group, 'instruction_placement') === 'acfe_instructions_tooltip') {
 			$field_group['instruction_placement'] = 'tooltip';
+		}
+
+		return $field_group;
+
+	}
+
+
+	/**
+	 * field_group_display_title
+	 *
+	 * Migrate ACFE Display Title to native ACF Display Title (added in ACF 6.6+)
+	 *
+	 * @param $field_group
+	 *
+	 * @return mixed
+	 * @since 0.9.2 (20/11/2025)
+	 *
+	 */
+	function field_group_display_title($field_group) {
+
+		// ACFE 6.6+
+		if (acfe_is_acf_66() && isset($field_group['acfe_display_title'])) {
+
+			// check display title wasn't already set
+			if (empty($field_group['display_title'])) {
+				$field_group['display_title'] = $field_group['acfe_display_title']; // assign old ACFE setting to new ACF setting
+			}
+
+			// unset old setting in all case
+			unset($field_group['acfe_display_title']);
 		}
 
 		return $field_group;
