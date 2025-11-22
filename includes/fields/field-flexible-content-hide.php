@@ -16,8 +16,12 @@ class acfe_field_flexible_content_hide {
 		add_action('acfe/flexible/render_field_settings', [$this, 'render_field_settings'], 7);
 
 		add_filter('acfe/flexible/validate_field', [$this, 'validate_hide']);
-		add_filter('acfe/flexible/remove_actions', [$this, 'remove_actions'], 10, 2);
-		add_filter('acfe/flexible/layouts/icons', [$this, 'layout_icons'], 50, 3);
+		add_filter('acfe/flexible/layouts/icons', [$this, 'layout_icons'], 60, 3);
+		add_filter('acfe/flexible/layouts/more_action_buttons', [$this, 'more_action_buttons'], 10, 2);
+		add_filter('acfe/flexible/layout_renamed', [$this, 'layout_renamed'], 20, 3);
+		add_filter('acfe/flexible/layout_disabled', [$this, 'layout_disabled'], 20, 3);
+		add_filter('acfe/flexible/action_buttons', [$this, 'action_buttons'], 10, 3);
+		add_filter('acfe/flexible/action_buttons', [$this, 'action_buttons_late'], 50, 3);
 
 	}
 
@@ -32,6 +36,24 @@ class acfe_field_flexible_content_hide {
 	function defaults_field($field) {
 
 		$field['acfe_flexible_remove_button'] = [];
+		$field['acfe_flexible_remove_top_actions'] = [];
+
+		return $field;
+
+	}
+
+
+	/**
+	 * validate_hide
+	 *
+	 * @param $field
+	 *
+	 * @return mixed
+	 */
+	function validate_hide($field) {
+
+		$field['acfe_flexible_remove_button'] = acf_get_array($field['acfe_flexible_remove_button']);
+		$field['acfe_flexible_remove_top_actions'] = acf_get_array($field['acfe_flexible_remove_top_actions']);
 
 		return $field;
 
@@ -46,13 +68,21 @@ class acfe_field_flexible_content_hide {
 	function render_field_settings($field) {
 
 		$hide_choices = [
-			'collapse' => 'Hide "Collapse"',
-			'add' => 'Hide "Add"',
-			'delete' => 'Hide "Delete"',
-			'duplicate' => 'Hide "Duplicate"',
+			'add' => __('Hide "Add Row"', 'acfe'),
+			'collapse' => __('Hide "Collapse"', 'acfe'),
+			'delete' => __('Hide "Delete"', 'acfe'),
+			'duplicate' => __('Hide "Duplicate"', 'acfe'),
 		];
 
-		if (acf_version_compare(acf_get_setting('version'), '<', '5.9')) {
+		// ACF 6.5+
+		if (acfe_is_acf_65()) {
+			$hide_choices['rename'] = __('Hide "Rename"', 'acfe');
+			$hide_choices['disable'] = __('Hide "Disable"', 'acfe');
+			$hide_choices['top_actions'] = __('Hide "Top Actions"', 'acfe');
+		}
+
+		// pre ACF-5.9
+		if (!acfe_is_acf_59()) {
 			acfe_unset($hide_choices, 'duplicate');
 		}
 
@@ -77,80 +107,48 @@ class acfe_field_flexible_content_hide {
 			]
 		]);
 
-	}
+		// ACF 6.5+
+		if (acfe_is_acf_65()) {
 
-
-	/**
-	 * validate_hide
-	 *
-	 * @param $field
-	 *
-	 * @return mixed
-	 */
-	function validate_hide($field) {
-
-		/**
-		 * old settings:
-		 *
-		 * acfe_flexible_remove_add_button
-		 * acfe_flexible_remove_duplicate_button
-		 * acfe_flexible_remove_delete_button
-		 */
-
-		$hide = acf_get_array($field['acfe_flexible_remove_button']);
-
-		// acfe_flexible_remove_add_button
-		if (acf_maybe_get($field, 'acfe_flexible_remove_add_button')) {
-
-			if (!in_array('add', $hide)) $hide[] = 'add';
-			acfe_unset($field, 'acfe_flexible_remove_add_button');
-
-		}
-
-		// acfe_flexible_remove_duplicate_button
-		if (acf_maybe_get($field, 'acfe_flexible_remove_duplicate_button')) {
-
-			if (!in_array('duplicate', $hide)) $hide[] = 'duplicate';
-			acfe_unset($field, 'acfe_flexible_remove_duplicate_button');
+			// Hide Top Actions
+			acf_render_field_setting($field, [
+				'label' => __('Hide Top Actions', 'acfe'),
+				'name' => 'acfe_flexible_remove_top_actions',
+				'key' => 'acfe_flexible_remove_top_actions',
+				'instructions' => '<a href="https://www.acf-extended.com/features/fields/flexible-content/advanced-settings#hide-top-actions" target="_blank">' . __('See documentation', 'acfe') . '</a>',
+				'type' => 'checkbox',
+				'default_value' => '',
+				'layout' => 'horizontal',
+				'choices' => [
+					'expand' => __('Hide "Expand All"', 'acfe'),
+					'collapse' => __('Hide "Collapse All"', 'acfe'),
+					'add' => __('Hide "Add Row"', 'acfe'),
+				],
+				'conditional_logic' => [
+					[
+						[
+							'field' => 'acfe_flexible_advanced',
+							'operator' => '==',
+							'value' => '1',
+						],
+						[
+							'field' => 'acfe_flexible_remove_button',
+							'operator' => '!=',
+							'value' => 'top_actions',
+						],
+					]
+				]
+			]);
 
 		}
-
-		// acfe_flexible_remove_delete_button
-		if (acf_maybe_get($field, 'acfe_flexible_remove_delete_button')) {
-
-			if (!in_array('delete', $hide)) $hide[] = 'delete';
-			acfe_unset($field, 'acfe_flexible_remove_delete_button');
-
-		}
-
-		$field['acfe_flexible_remove_button'] = $hide;
-
-		return $field;
-
-	}
-
-
-	/**
-	 * remove_actions
-	 *
-	 * @param $return
-	 * @param $field
-	 *
-	 * @return bool|mixed
-	 */
-	function remove_actions($return, $field) {
-
-		if (!in_array('add', $field['acfe_flexible_remove_button'])) {
-			return $return;
-		}
-
-		return true;
 
 	}
 
 
 	/**
 	 * layout_icons
+	 *
+	 * Remove the icons from the layout controls
 	 *
 	 * @param $icons
 	 * @param $layout
@@ -176,8 +174,185 @@ class acfe_field_flexible_content_hide {
 			acfe_unset($icons, 'collapse');
 		}
 
+		// get more actions buttons (rename, disable...)
+		$more_actions_buttons = acf_get_instance('acfe_field_flexible_content_popup')->get_popup_actions_buttons($field);
+
+		if (empty($more_actions_buttons)) {
+			acfe_unset($icons, 'more');
+		}
+
 		return $icons;
 
+	}
+
+
+	/**
+	 * more_action_buttons
+	 *
+	 * Remove the buttons from the layout more actions popup
+	 *
+	 * @param $buttons
+	 * @param $field
+	 *
+	 * @return void
+	 */
+	function more_action_buttons($buttons, $field) {
+
+		if (in_array('rename', $field['acfe_flexible_remove_button'])) {
+			acfe_unset($buttons, 'rename');
+		}
+
+		if (in_array('disable', $field['acfe_flexible_remove_button'])) {
+			acfe_unset($buttons, 'disable');
+		}
+
+		return $buttons;
+
+	}
+
+
+	/**
+	 * layout_renamed
+	 *
+	 * @param $renamed
+	 * @param $field
+	 * @param $i
+	 *
+	 * @return mixed|string
+	 */
+	function layout_renamed($renamed, $field, $i) {
+
+		// never show renamed layout
+		if (in_array('rename', $field['acfe_flexible_remove_button'])) {
+			return '';
+		}
+
+		return $renamed;
+
+	}
+
+
+	/**
+	 * layout_disabled
+	 *
+	 * @param $disabled
+	 * @param $field
+	 * @param $i
+	 *
+	 * @return false|mixed
+	 */
+	function layout_disabled($disabled, $field, $i) {
+
+		// never show disabled layout
+		if (in_array('disable', $field['acfe_flexible_remove_button'])) {
+			return false;
+		}
+
+		return $disabled;
+
+	}
+
+
+	/**
+	 * action_buttons
+	 *
+	 * @param $buttons
+	 * @param $field
+	 * @param $position
+	 *
+	 * @return array|mixed
+	 */
+	function action_buttons($buttons, $field, $position) {
+
+		// remove add on both top & bottom
+		if (in_array('add', $field['acfe_flexible_remove_button'])) {
+			acfe_unset($buttons, 'add');
+		}
+
+		// remove top actions
+		if ($position === 'top' && in_array('top_actions', $field['acfe_flexible_remove_button'])) {
+			return []; // return empty array to hide the whole top actions
+		}
+
+		// remove add on top only
+		if ($position === 'top' && in_array('add', $field['acfe_flexible_remove_top_actions'])) {
+			acfe_unset($buttons, 'add');
+		}
+
+		if (in_array('expand', $field['acfe_flexible_remove_top_actions'])) {
+			acfe_unset($buttons, 'expand');
+		}
+
+		if (in_array('collapse', $field['acfe_flexible_remove_top_actions'])) {
+			acfe_unset($buttons, 'collapse');
+		}
+
+		return $buttons;
+
+	}
+
+
+	/**
+	 * action_buttons_late
+	 *
+	 * @param $buttons
+	 * @param $field
+	 * @param $position
+	 *
+	 * @return array|mixed
+	 */
+	function action_buttons_late($buttons, $field, $position) {
+
+		// if separator is first or last, remove it
+		if ($this->array_key_first($buttons) === 'separator' || $this->array_key_last($buttons) === 'separator') {
+			acfe_unset($buttons, 'separator');
+		}
+
+		return $buttons;
+
+	}
+
+
+	/**
+	 * array_key_first
+	 *
+	 * @param $array
+	 *
+	 * @return int|string|null
+	 */
+	function array_key_first($array) {
+
+		if (!is_array($array) || empty($array)) {
+			return null;
+		}
+
+		foreach ($array as $k => $v) {
+			return $k;
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * array_key_last
+	 *
+	 * @param $array
+	 *
+	 * @return int|string|null
+	 */
+	function array_key_last($array) {
+
+		if (!is_array($array) || empty($array)) {
+			return null;
+		}
+
+		$last = null;
+		foreach ($array as $k => $v) {
+			$last = $k;
+		}
+
+		return $last;
 	}
 
 }

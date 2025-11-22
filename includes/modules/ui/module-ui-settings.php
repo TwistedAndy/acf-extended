@@ -9,6 +9,11 @@ if (!acf_get_setting('acfe/modules/ui')) {
 	return;
 }
 
+// check setting
+if (!acf_get_setting('acfe/modules/settings_ui')) {
+	return;
+}
+
 class acfe_enhanced_ui_settings extends acfe_enhanced_ui {
 
 	/**

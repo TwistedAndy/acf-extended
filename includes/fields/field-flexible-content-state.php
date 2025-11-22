@@ -14,13 +14,12 @@ class acfe_field_flexible_content_state {
 		// Hooks
 		add_filter('acfe/flexible/defaults_field', [$this, 'defaults_field'], 8);
 		add_action('acfe/flexible/render_field_settings', [$this, 'render_field_settings'], 8);
-
-		add_filter('acfe/flexible/validate_field', [$this, 'validate_state']);
 		add_filter('acfe/flexible/wrapper_attributes', [$this, 'wrapper_attributes'], 10, 2);
 		add_filter('acfe/flexible/layouts/div', [$this, 'layout_div'], 10, 3);
 		add_filter('acfe/flexible/layouts/placeholder', [$this, 'layout_placeholder'], 10, 3);
 		add_filter('acfe/flexible/layouts/handle', [$this, 'layout_handle'], 10, 3);
 		add_filter('acfe/flexible/layouts/icons', [$this, 'layout_icons'], 50, 3);
+		add_filter('acfe/flexible/action_buttons', [$this, 'action_buttons'], 10, 3);
 
 	}
 
@@ -53,16 +52,16 @@ class acfe_field_flexible_content_state {
 			'label' => __('Default Layouts State', 'acfe'),
 			'name' => 'acfe_flexible_layouts_state',
 			'key' => 'acfe_flexible_layouts_state',
-			'instructions' => __('Force layouts to be collapsed or opened', 'acfe'),
+			'instructions' => '<a href="https://www.acf-extended.com/features/fields/flexible-content/advanced-settings#layout-states" target="_blank">' . __('See documentation', 'acfe') . '</a>',
 			'type' => 'radio',
 			'layout' => 'horizontal',
 			'default_value' => 'user',
 			'placeholder' => __('Default (User preference)', 'acfe'),
 			'choices' => [
-				'user' => 'User preference',
-				'collapse' => 'Collapsed',
-				'open' => 'Opened',
-				'force_open' => 'Always opened',
+				'user' => __('User preference', 'acfe'),
+				'collapse' => __('Collapsed', 'acfe'),
+				'open' => __('Opened', 'acfe'),
+				'force_open' => __('Always opened', 'acfe'),
 			],
 			'conditional_logic' => [
 				[
@@ -79,26 +78,6 @@ class acfe_field_flexible_content_state {
 				]
 			]
 		]);
-
-	}
-
-
-	/**
-	 * validate_state
-	 *
-	 * @param $field
-	 *
-	 * @return mixed
-	 */
-	function validate_state($field) {
-
-		if (!acf_maybe_get($field, 'acfe_flexible_layouts_remove_collapse')) {
-			return $field;
-		}
-
-		$field['acfe_flexible_layouts_state'] = 'force_open';
-
-		return $field;
 
 	}
 
@@ -220,6 +199,28 @@ class acfe_field_flexible_content_state {
 		acfe_unset($icons, 'collapse');
 
 		return $icons;
+
+	}
+
+
+	/**
+	 * action_buttons
+	 *
+	 * @param $buttons
+	 * @param $field
+	 * @param $position
+	 *
+	 * @return array|mixed
+	 */
+	function action_buttons($buttons, $field, $position) {
+
+		// remove expand/collapse top actions
+		if ($position === 'top' && $field['acfe_flexible_layouts_state'] === 'force_open') {
+			acfe_unset($buttons, 'expand');
+			acfe_unset($buttons, 'collapse');
+		}
+
+		return $buttons;
 
 	}
 
