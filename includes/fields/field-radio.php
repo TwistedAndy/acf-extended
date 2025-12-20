@@ -4,14 +4,14 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-class acfe_field_checkbox extends acfe_field_extend {
+class acfe_field_radio extends acfe_field_extend {
 
 	/**
 	 * initialize
 	 */
 	function initialize() {
 
-		$this->name = 'checkbox';
+		$this->name = 'radio';
 
 	}
 
@@ -35,7 +35,7 @@ class acfe_field_checkbox extends acfe_field_extend {
 		}
 
 		// custom value allowed
-		if (!empty($field['allow_custom'])) {
+		if (!empty($field['other_choice'])) {
 			return $valid;
 		}
 
@@ -60,4 +60,4 @@ class acfe_field_checkbox extends acfe_field_extend {
 
 }
 
-acf_new_instance('acfe_field_checkbox');
+acf_new_instance('acfe_field_radio');

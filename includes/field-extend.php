@@ -6,10 +6,7 @@ if (!defined('ABSPATH')) {
 
 class acfe_field_extend {
 
-	var $name = '',
-		$replace = [],
-		$defaults = [],
-		$instance = '';
+	var $name = '', $replace = [], $defaults = [], $instance = '';
 
 	/**
 	 * construct
@@ -48,6 +45,9 @@ class acfe_field_extend {
 			['action', 'acf/render_field_settings', [$this, 'render_field_settings'], 9, 1],
 			['filter', 'acf/prepare_field', [$this, 'prepare_field'], 10, 1],
 			['filter', 'acf/translate_field', [$this, 'translate_field'], 10, 1],
+
+			// acfe
+			['filter', 'acfe/form/validate_value', [$this, 'validate_front_value'], 10, 5],
 			['filter', 'acfe/field_wrapper_attributes', [$this, 'field_wrapper_attributes'], 10, 2],
 			['filter', 'acfe/load_fields', [$this, 'load_fields'], 10, 2],
 		];
@@ -101,6 +101,42 @@ class acfe_field_extend {
 	 */
 	function get_field_type() {
 		return acf_get_field_type($this->name);
+	}
+
+	/**
+	 * pre_validate_front_value
+	 *
+	 * @param $valid
+	 * @param $value
+	 * @param $field
+	 * @param $form
+	 *
+	 * @return mixed|null
+	 */
+	function pre_validate_front_value($valid, $value, $field, $form) {
+
+		// already invalid
+		if (!$valid || (is_string($valid) && !empty($valid))) {
+			return false;
+		}
+
+		// empty value
+		if (empty($value)) {
+			return false;
+		}
+
+		// default validation
+		$validate = true;
+
+		// variations
+		$validate = apply_filters("acfe/form/pre_validate_value/form={$form['name']}", $validate, $field, $form);
+		$validate = apply_filters("acfe/form/pre_validate_value/type={$field['type']}", $validate, $field, $form);
+		$validate = apply_filters("acfe/form/pre_validate_value/name={$field['_name']}", $validate, $field, $form);
+		$validate = apply_filters("acfe/form/pre_validate_value/key={$field['key']}", $validate, $field, $form);
+
+		// return
+		return $validate;
+
 	}
 
 	/**
