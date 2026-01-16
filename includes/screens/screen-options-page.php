@@ -67,4 +67,4 @@ class acfe_screen_options_page {
 
 }
 
-new acfe_screen_options_page();
+acf_new_instance('acfe_screen_options_page');

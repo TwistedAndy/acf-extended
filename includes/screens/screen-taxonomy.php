@@ -103,14 +103,9 @@ class acfe_screen_taxonomy {
 			// get screen
 			$screen = get_current_screen();
 
-			// make sure the meta boxes aren't already rendered by a third party plugin
-			if (isset($screen->id) && empty($wp_meta_boxes[$screen->id]['normal'])) {
-				do_meta_boxes($screen, 'normal', $term);
-			}
-
-			if (isset($screen->id) && empty($wp_meta_boxes[$screen->id]['side'])) {
-				do_meta_boxes($screen, 'side', $term);
-			}
+			// do metaboxes
+			do_meta_boxes($screen, 'normal', $term);
+			do_meta_boxes($screen, 'side', $term);
 
 		}
 
@@ -258,4 +253,4 @@ class acfe_screen_taxonomy {
 
 }
 
-new acfe_screen_taxonomy();
+acf_new_instance('acfe_screen_taxonomy');

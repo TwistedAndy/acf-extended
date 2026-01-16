@@ -251,7 +251,7 @@ class acfe_field_recaptcha extends acf_field {
 
 		// validate request response
 		if (is_wp_error($response)) {
-			return __('An error has occured');
+			return __('Invalid reCaptcha, please try again', 'acfe');
 		}
 
 		// get response as json
@@ -260,12 +260,12 @@ class acfe_field_recaptcha extends acf_field {
 		// success is not true|false
 		// something went wrong
 		if (!isset($data->success)) {
-			return __('An error has occured');
+			return __('Invalid reCaptcha, please try again', 'acfe');
 		}
 
 		// error
 		if ($data->success === false) {
-			return __('Invalid reCaptcha, please try again');
+			return __('Invalid reCaptcha, please try again', 'acfe');
 		}
 
 		// success
@@ -284,6 +284,11 @@ class acfe_field_recaptcha extends acf_field {
 	 * @return null
 	 */
 	function update_value($value, $post_id, $field) {
+
+		// front-end form: set flag to indicate recaptcha is present
+		if (acfe_is_local_post_id('acfe/form/validation')) {
+			acf_set_form_data('acfe/form/recaptcha', true);
+		}
 
 		// do not save value
 		return null;
